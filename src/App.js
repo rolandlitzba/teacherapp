@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from './Header';
+import Footer from './Footer';
+import styled from 'styled-components';
+import ClassList from './ClassList';
+import GlobalStyles from './GlobalStyles';
 
-function App() {
+const Grid = styled.div`
+  display: grid;
+  grid-template-rows: 60px auto 60px;
+  height: 100vh;
+`;
+
+const Main = styled.main``;
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid>
+      <GlobalStyles />
+      <Header />
+      <Main>
+        <ClassList />
+      </Main>
+      <Footer />
+    </Grid>
   );
 }
-
-export default App;
