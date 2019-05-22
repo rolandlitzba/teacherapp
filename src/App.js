@@ -1,19 +1,9 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import ClassList from './ClassList';
-
-const GlobalStyles = createGlobalStyle`
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;margin: 0;
-  padding: 0;
-  }
-`;
+import GlobalStyles from './GlobalStyles';
 
 const Grid = styled.div`
   display: grid;
