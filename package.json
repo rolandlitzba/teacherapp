@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^5.2.1",
     "components": "^0.1.0",
     "docz": "^1.2.0",
     "docz-theme-default": "^1.2.0",
@@ -11,12 +12,12 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
-    "styled": "^1.0.0"
+    "styled-components": "4.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "docz:dev": "docz dev",
     "docz:build": "docz build"
