@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledHeader = styled.header`
-  background-image: linear-gradient(45deg, #3290ba, #7dbcbb, #b1deb5);
+  background-image: linear-gradient(45deg, #b1deb5, #7dbcbb, #3290ba);
   color: #fcffff;
   font-size: 1.4em;
   padding: 20px;

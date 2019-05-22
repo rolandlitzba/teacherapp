@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Jyn Erso",
+    "id": 1,
+    "absence": 0
+  },
+  {
+    "name": "Chirrut Imwe",
+    "id": 2,
+    "absence": 1
+  },
+  {
+    "name": "Baze Malbus",
+    "id": 3,
+    "absence": 0
+  },
+  {
+    "name": "Bodhi Rock",
+    "id": 4,
+    "absence": 20
+  }
+]

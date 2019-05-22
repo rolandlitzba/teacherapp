@@ -14,11 +14,12 @@ const StyledStudentInformation = styled.p`
   color: #818988;
 `;
 
-export default function Card() {
+export default function Card(props) {
+  const { name, absence } = props.card;
   return (
     <StyledCard>
-      <h3>Jyn Erso</h3>
-      <StyledStudentInformation>Fehltage: 2</StyledStudentInformation>
+      <h3>{name}</h3>
+      <StyledStudentInformation>Fehltage: {absence}</StyledStudentInformation>
     </StyledCard>
   );
 }
