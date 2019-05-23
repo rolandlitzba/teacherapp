@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import styled from 'styled-components';
-import ClassList from './ClassList';
-import GlobalStyles from './GlobalStyles';
+import CardList from './card/CardList';
+import GlobalStyles from './misc/GlobalStyles';
 import Form from './Form';
 
 const mockdata = require('./mockdata.json');
@@ -30,7 +30,7 @@ export default function App() {
       <Header />
       <Main>
         <Form onFormSubmit={data => createCard(data)} />
-        <ClassList cards={cards} />
+        <CardList cards={cards} />
       </Main>
       <Footer />
     </Grid>
