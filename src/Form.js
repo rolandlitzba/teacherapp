@@ -36,18 +36,18 @@ const Flex = styled.div`
   justify-self: center;
 `;
 
-export default function Form({ onFormSubmit }) {
-  function handleSubmit(event) {
+export default function Form({ handleSubmitForm }) {
+  function onFormSubmit(event) {
     event.preventDefault();
     const form = event.target;
-    onFormSubmit({
+    handleSubmitForm({
       name: form.student.value,
       absence: form.absence.value
     });
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm onSubmit={onFormSubmit}>
       <StyledLabel>
         Student name:
         <StyledNameInput name="student" placeholder="Insert Name here" />

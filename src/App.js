@@ -29,7 +29,7 @@ export default function App() {
       <GlobalStyles />
       <Header />
       <Main>
-        <Form onFormSubmit={data => createCard(data)} />
+        <Form handleSubmitForm={data => createCard(data)} />
         <CardList cards={cards} />
       </Main>
       <Footer />
