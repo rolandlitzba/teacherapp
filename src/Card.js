@@ -14,8 +14,8 @@ const StyledStudentInformation = styled.p`
   color: #818988;
 `;
 
-export default function Card(props) {
-  const { name, absence } = props.card;
+export default function Card(cards) {
+  const { name, absence } = cards.card;
   return (
     <StyledCard>
       <h3>{name}</h3>
