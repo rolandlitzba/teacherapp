@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import styled from 'styled-components';
-import ClassList from './ClassList';
-import GlobalStyles from './GlobalStyles';
+import CardList from './card/CardList';
+import GlobalStyles from './misc/GlobalStyles';
+import Form from './Form';
 
 const mockdata = require('./mockdata.json');
 
@@ -18,12 +19,18 @@ const Main = styled.main``;
 export default function App() {
   const [cards, setCards] = useState(mockdata || []);
 
+  function createCard(data) {
+    const newCards = [...cards, data];
+    setCards(newCards);
+  }
+
   return (
     <Grid>
       <GlobalStyles />
       <Header />
       <Main>
-        <ClassList cards={cards} />
+        <Form handleSubmitForm={data => createCard(data)} />
+        <CardList cards={cards} />
       </Main>
       <Footer />
     </Grid>
