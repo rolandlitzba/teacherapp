@@ -4,7 +4,8 @@ import Footer from './Footer';
 import styled from 'styled-components';
 import CardList from './card/CardList';
 import GlobalStyles from './misc/GlobalStyles';
-import Form from './Form';
+import Form from './form/Form';
+import AddButton from './form/FormButton';
 
 const mockdata = require('./mockdata.json');
 
@@ -31,6 +32,7 @@ export default function App() {
       <Main>
         <Form handleSubmitForm={data => createCard(data)} />
         <CardList cards={cards} />
+        <AddButton />
       </Main>
       <Footer />
     </Grid>
