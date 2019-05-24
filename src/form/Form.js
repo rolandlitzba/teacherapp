@@ -7,22 +7,22 @@ const StyledForm = styled.form`
 `;
 
 const StyledNameInput = styled.input`
-  padding: 10px 20px;
   background: #fcffff;
   border: solid 1px #e5e8ef;
-  box-shadow: 3px 3px 5px 4px #e5e8ef;
   border-radius: 12px;
-  margin: 15px;
+  box-shadow: 3px 3px 5px 4px #e5e8ef;
   font-size: 1.2em;
+  margin: 15px;
+  padding: 10px 20px;
 `;
 
 const StyledAbsenceInput = styled.input`
-  padding: 10px 20px;
   background: #fcffff;
   border: solid 1px #e5e8ef;
-  box-shadow: 3px 3px 5px 4px #e5e8ef;
   border-radius: 12px;
+  box-shadow: 3px 3px 5px 4px #e5e8ef;
   margin: 15px;
+  padding: 10px 20px;
   font-size: 1.2em;
 `;
 

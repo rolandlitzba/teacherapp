@@ -6,8 +6,8 @@ const StyledFooter = styled.footer`
   border-top: solid #e5e8ef;
   color: #818988;
   font-size: 1.2em;
-  text-align: center;
   padding: 15px;
+  text-align: center;
 `;
 
 export default function Footer() {
