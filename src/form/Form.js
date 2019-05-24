@@ -36,7 +36,7 @@ const Flex = styled.div`
   justify-self: center;
 `;
 
-export default function Form({ handleSubmitForm }) {
+export default function Form({ history, handleSubmitForm }) {
   function onFormSubmit(event) {
     event.preventDefault();
     const form = event.target;
@@ -44,6 +44,7 @@ export default function Form({ handleSubmitForm }) {
       name: form.student.value,
       absence: form.absence.value
     });
+    history.replace('/');
   }
 
   return (

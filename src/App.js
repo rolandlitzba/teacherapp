@@ -5,8 +5,7 @@ import styled from 'styled-components';
 import CardList from './card/CardList';
 import GlobalStyles from './misc/GlobalStyles';
 import Form from './form/Form';
-import AddButton from './form/FormButton';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 const mockdata = require('./mockdata.json');
 
@@ -32,21 +31,15 @@ export default function App() {
         <GlobalStyles />
         <Header />
         <Main>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <>
-                <CardList cards={cards} />
-                <Link to="/create">
-                  <AddButton />
-                </Link>
-              </>
-            )}
-          />
+          <Route exact path="/" render={() => <CardList cards={cards} />} />
           <Route
             path="/create"
-            render={() => <Form handleSubmitForm={data => createCard(data)} />}
+            render={props => (
+              <Form
+                handleSubmitForm={data => createCard(data)}
+                history={props.history}
+              />
+            )}
           />
         </Main>
         <Footer />
