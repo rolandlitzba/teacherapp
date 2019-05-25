@@ -4,7 +4,8 @@ import Footer from './Footer';
 import styled from 'styled-components';
 import CardList from './card/CardList';
 import GlobalStyles from './misc/GlobalStyles';
-import Form from './Form';
+import Form from './form/Form';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 const mockdata = require('./mockdata.json');
 
@@ -25,14 +26,24 @@ export default function App() {
   }
 
   return (
-    <Grid>
-      <GlobalStyles />
-      <Header />
-      <Main>
-        <Form handleSubmitForm={data => createCard(data)} />
-        <CardList cards={cards} />
-      </Main>
-      <Footer />
-    </Grid>
+    <Router>
+      <Grid>
+        <GlobalStyles />
+        <Header />
+        <Main>
+          <Route exact path="/" render={() => <CardList cards={cards} />} />
+          <Route
+            path="/create"
+            render={props => (
+              <Form
+                handleSubmitForm={data => createCard(data)}
+                history={props.history}
+              />
+            )}
+          />
+        </Main>
+        <Footer />
+      </Grid>
+    </Router>
   );
 }
