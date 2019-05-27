@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import CardList from './card/CardList';
 import GlobalStyles from './misc/GlobalStyles';
 import Form from './form/Form';
+import DetailCard from './card/DetailCard';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 const mockdata = require('./mockdata.json');
@@ -25,6 +26,11 @@ export default function App() {
     setCards(newCards);
   }
 
+  function findCard(id) {
+    const card = cards.find(card => card.id === id);
+    return card;
+  }
+
   return (
     <Router>
       <Grid>
@@ -39,6 +45,12 @@ export default function App() {
                 handleSubmitForm={data => createCard(data)}
                 history={props.history}
               />
+            )}
+          />
+          <Route
+            path="/details/:id"
+            render={props => (
+              <DetailCard card={findCard(props.match.params.id)} />
             )}
           />
         </Main>
