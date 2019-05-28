@@ -14,11 +14,13 @@ const mockdata = require('./mockdata.json');
 
 const Grid = styled.div`
   display: grid;
-  grid-template-rows: 75px auto 60px;
+  grid-template-rows: 70px auto 50px;
   height: 100vh;
 `;
 
-const Main = styled.main``;
+const Main = styled.main`
+  overflow-y: scroll;
+`;
 
 export default function App() {
   const [cards, setCards] = useState(mockdata || []);
