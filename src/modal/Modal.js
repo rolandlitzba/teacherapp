@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import Form from '../form/Form';
 
 const StyledModal = styled.div`
   display: flex;
@@ -17,8 +18,12 @@ const StyledModal = styled.div`
   left: 12px;
 `;
 
-const Modal = ({ Showing, hide }) =>
-  Showing
+const StyledEscButton = styled.button`
+  font-size: 2.5em;
+`;
+
+export default function Modal({ history, handleSubmitForm, Showing, hide }) {
+  return Showing
     ? ReactDOM.createPortal(
         <StyledModal>
           <div className="modal-overlay" />
@@ -30,23 +35,25 @@ const Modal = ({ Showing, hide }) =>
             role="dialog"
           >
             <div className="modal">
-              <div className="modal-header">
-                <button
-                  type="button"
-                  className="modal-close-button"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  onClick={hide}
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <p>Hello, I'm a modal.</p>
+              <div className="modal-header" />
+              <Form
+                handleSubmitForm={handleSubmitForm}
+                history={history}
+                hide={hide}
+              />
+              <StyledEscButton
+                type="button"
+                className="modal-close-button"
+                data-dismiss="modal"
+                aria-label="Close"
+                onClick={hide}
+              >
+                <span aria-hidden="true">&times;</span>
+              </StyledEscButton>
             </div>
           </div>
         </StyledModal>,
         document.body
       )
     : null;
-
-export default Modal;
+}

@@ -29,6 +29,7 @@ export default function App() {
   function createCard(data) {
     const newCards = [...cards, data];
     setCards(newCards);
+    console.log(data);
   }
 
   function findCard(id) {
@@ -58,10 +59,23 @@ export default function App() {
               <DetailCard card={findCard(props.match.params.id)} />
             )}
           />
-          <button className="button-default" onClick={toggle}>
-            Show Modal
-          </button>
-          <Modal Showing={Showing} hide={toggle} />
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <>
+                <button className="button-default" onClick={toggle}>
+                  Add Student Modal
+                </button>
+                <Modal
+                  handleSubmitForm={data => createCard(data)}
+                  history={props.history}
+                  Showing={Showing}
+                  hide={toggle}
+                />
+              </>
+            )}
+          />
         </Main>
         <Footer />
       </Grid>

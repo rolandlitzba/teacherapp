@@ -36,7 +36,7 @@ const Flex = styled.div`
   justify-self: center;
 `;
 
-export default function Form({ history, handleSubmitForm }) {
+export default function Form({ history, handleSubmitForm, hide }) {
   function onFormSubmit(event) {
     event.preventDefault();
     const form = event.target;
@@ -45,6 +45,7 @@ export default function Form({ history, handleSubmitForm }) {
       absence: form.absence.value
     });
     history.replace('/');
+    hide();
   }
 
   return (
