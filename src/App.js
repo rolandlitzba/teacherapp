@@ -7,6 +7,8 @@ import GlobalStyles from './misc/GlobalStyles';
 import Form from './form/Form';
 import DetailCard from './card/DetailCard';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Modal from './modal/Modal';
+import useModal from './modal/useModal';
 
 const mockdata = require('./mockdata.json');
 
@@ -20,6 +22,7 @@ const Main = styled.main``;
 
 export default function App() {
   const [cards, setCards] = useState(mockdata || []);
+  const { Showing, toggle } = useModal();
 
   function createCard(data) {
     const newCards = [...cards, data];
@@ -53,6 +56,10 @@ export default function App() {
               <DetailCard card={findCard(props.match.params.id)} />
             )}
           />
+          <button className="button-default" onClick={toggle}>
+            Show Modal
+          </button>
+          <Modal Showing={Showing} hide={toggle} />
         </Main>
         <Footer />
       </Grid>
