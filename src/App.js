@@ -4,7 +4,6 @@ import Footer from './Footer';
 import styled from 'styled-components';
 import CardList from './card/CardList';
 import GlobalStyles from './misc/GlobalStyles';
-import Form from './form/Form';
 import DetailCard from './card/DetailCard';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Modal from './modal/Modal';
@@ -35,7 +34,7 @@ export default function App() {
   function createCard(data) {
     const newCards = [...cards, data];
     setCards(newCards);
-    console.log(data);
+    console.log(newCards);
   }
 
   function findCard(id) {
@@ -50,15 +49,6 @@ export default function App() {
         <Header />
         <Main>
           <Route exact path="/" render={() => <CardList cards={cards} />} />
-          <Route
-            path="/create"
-            render={props => (
-              <Form
-                handleSubmitForm={data => createCard(data)}
-                history={props.history}
-              />
-            )}
-          />
           <Route
             path="/details/:id"
             render={props => (
