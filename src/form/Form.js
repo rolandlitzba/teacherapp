@@ -12,7 +12,7 @@ const StyledNameInput = styled.input`
   border-radius: 12px;
   box-shadow: 3px 3px 5px 4px #e5e8ef;
   font-size: 1.2em;
-  margin: 15px;
+  margin: 15px 0;
   padding: 10px 20px;
 `;
 
@@ -22,7 +22,7 @@ const StyledAbsenceInput = styled.input`
   border-radius: 12px;
   box-shadow: 3px 3px 5px 4px #e5e8ef;
   font-size: 1.2em;
-  margin: 15px;
+  margin: 15px 0;
   padding: 10px 20px;
 `;
 
@@ -64,7 +64,7 @@ export default function Form({ history, handleSubmitForm, hide }) {
         />
       </StyledLabel>
       <Flex>
-        <button>Add Student</button>
+        <button>Confirm</button>
       </Flex>
     </StyledForm>
   );

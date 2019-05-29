@@ -22,6 +22,12 @@ const Main = styled.main`
   overflow-y: scroll;
 `;
 
+const StyledAddButton = styled.button`
+  position: absolute;
+  right: 20px;
+  bottom: 60px;
+`;
+
 export default function App() {
   const [cards, setCards] = useState(mockdata || []);
   const { Showing, toggle } = useModal();
@@ -64,9 +70,9 @@ export default function App() {
             path="/"
             render={props => (
               <>
-                <button className="button-default" onClick={toggle}>
-                  Add Student Modal
-                </button>
+                <StyledAddButton className="button-default" onClick={toggle}>
+                  Add Student
+                </StyledAddButton>
                 <Modal
                   handleSubmitForm={data => createCard(data)}
                   history={props.history}
