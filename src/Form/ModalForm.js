@@ -21,7 +21,11 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledEscButton = styled.button`
-  font-size: 2.5em;
+  font-size: 1.2em;
+`;
+
+const StyledConfirmButton = styled.button`
+  font-size: 1.2em;
 `;
 
 const StyledForm = styled.form`
@@ -59,7 +63,12 @@ const Flex = styled.div`
   justify-self: center;
 `;
 
-export default function Modal({ history, handleSubmitForm, Showing, hide }) {
+export default function ModalForm({
+  history,
+  handleSubmitForm,
+  Showing,
+  hide
+}) {
   function onFormSubmit(event) {
     event.preventDefault();
     const form = event.target;
@@ -99,12 +108,10 @@ export default function Modal({ history, handleSubmitForm, Showing, hide }) {
                 />
               </StyledLabel>
               <Flex>
-                <button>Confirm</button>
+                <StyledConfirmButton>confirm</StyledConfirmButton>
+                <StyledEscButton onClick={hide}>cancel</StyledEscButton>
               </Flex>
             </StyledForm>
-            <StyledEscButton onClick={hide}>
-              <span aria-hidden="true">&times;</span>
-            </StyledEscButton>
           </StyledWrapper>
         </StyledModal>,
         document.body

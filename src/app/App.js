@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../Header';
+import Footer from '../Footer';
 import styled from 'styled-components';
-import CardList from './card/CardList';
-import GlobalStyles from './misc/GlobalStyles';
-import DetailCard from './card/DetailCard';
+import CardList from '../card/CardList';
+import GlobalStyles from '../misc/GlobalStyles';
+import DetailCard from '../card/DetailCard';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Modal from './modal/Modal';
-import useModal from './modal/useModal';
+import ModalForm from '../Form/ModalForm';
+import useModalForm from '../Form/useModalForm';
 
-const mockdata = require('./mockdata.json');
+const mockdata = require('../mockdata.json');
 
 const Grid = styled.div`
   display: grid;
@@ -29,12 +29,11 @@ const StyledAddButton = styled.button`
 
 export default function App() {
   const [cards, setCards] = useState(mockdata || []);
-  const { Showing, toggle } = useModal();
+  const { Showing, toggle } = useModalForm();
 
   function createCard(data) {
     const newCards = [...cards, data];
     setCards(newCards);
-    console.log(newCards);
   }
 
   function findCard(id) {
@@ -63,7 +62,7 @@ export default function App() {
                 <StyledAddButton className="button-default" onClick={toggle}>
                   Add Student
                 </StyledAddButton>
-                <Modal
+                <ModalForm
                   handleSubmitForm={data => createCard(data)}
                   history={props.history}
                   Showing={Showing}
