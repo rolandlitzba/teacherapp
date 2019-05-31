@@ -51,7 +51,7 @@ const StyledButton = styled.button`
   font-size: 1.2em;
 `;
 
-export default function ModalForm({
+export default function modalForm({
   history,
   handleSubmitForm,
   Showing,
