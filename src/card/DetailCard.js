@@ -24,6 +24,7 @@ const StyledHeading = styled.h3`
 
 export default function DetailCard({ card }) {
   const { name, absence, comments } = card;
+  console.log(card);
   return (
     <StyledCardDetails>
       <StyledHeading>{name}</StyledHeading>
