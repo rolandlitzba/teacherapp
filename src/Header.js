@@ -10,5 +10,5 @@ const StyledHeader = styled.header`
 `;
 
 export default function Header() {
-  return <StyledHeader>Header</StyledHeader>;
+  return <StyledHeader>MyClass</StyledHeader>;
 }

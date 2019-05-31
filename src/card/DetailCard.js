@@ -22,14 +22,25 @@ const StyledHeading = styled.h3`
   padding: 10px;
 `;
 
-export default function DetailCard({ card }) {
-  const { name, absence, comments } = card;
-  console.log(card);
+const StyledDeleteButton = styled.button`
+  font-size: 1.1em;
+  margin: 10px;
+`;
+
+export default function DetailCard({ card, onDelete, history }) {
+  const { name, absence, comments, id } = card;
+
+  function onDeleteClick() {
+    onDelete(id);
+    history.push('/');
+  }
+
   return (
     <StyledCardDetails>
       <StyledHeading>{name}</StyledHeading>
       <StyledStudentInformation>Fehltage: {absence}</StyledStudentInformation>
       <StyledStudentInformation>Comments: {comments}</StyledStudentInformation>
+      <StyledDeleteButton onClick={onDeleteClick}>Delete</StyledDeleteButton>
     </StyledCardDetails>
   );
 }
