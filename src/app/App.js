@@ -8,6 +8,7 @@ import DetailCard from '../card/DetailCard';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ModalForm from '../Form/ModalForm';
 import useModalForm from '../Form/useModalForm';
+import { getLocal, setLocal } from '../services';
 
 const mockdata = require('../mockdata.json');
 
@@ -29,8 +30,12 @@ const StyledAddButton = styled.button`
 `;
 
 export default function App() {
-  const [cards, setCards] = useState(mockdata || []);
+  const [cards, setCards] = useState(getLocal('cards') || mockdata);
   const { Showing, toggle } = useModalForm();
+  console.log(cards);
+  useEffect(() => {
+    setLocal('cards', cards);
+  }, [cards]);
 
   function createCard(data) {
     const newCards = [...cards, data];
