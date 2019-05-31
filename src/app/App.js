@@ -23,8 +23,9 @@ const Main = styled.main`
 
 const StyledAddButton = styled.button`
   position: absolute;
-  right: 20px;
+  right: 30px;
   bottom: 60px;
+  font-size: 1.2em;
 `;
 
 export default function App() {
@@ -41,6 +42,11 @@ export default function App() {
     return card;
   }
 
+  function handleDelete(id) {
+    const index = cards.findIndex(card => card.id === id);
+    setCards([...cards.slice(0, index), ...cards.slice(index + 1)]);
+  }
+
   return (
     <Router>
       <Grid>
@@ -51,7 +57,11 @@ export default function App() {
           <Route
             path="/details/:id"
             render={props => (
-              <DetailCard card={findCard(props.match.params.id)} />
+              <DetailCard
+                card={findCard(props.match.params.id)}
+                onDelete={handleDelete}
+                {...props}
+              />
             )}
           />
           <Route
