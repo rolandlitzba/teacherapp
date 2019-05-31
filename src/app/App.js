@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 import styled from 'styled-components';
@@ -47,6 +47,22 @@ export default function App() {
     setCards([...cards.slice(0, index), ...cards.slice(index + 1)]);
   }
 
+  function handleUpdateAbsence(editedCard) {
+    console.log(editedCard);
+    const index = cards.findIndex(card => card.id === editedCard.id);
+
+    const updatedCard = { ...cards[index], absence: editedCard.absence };
+
+    console.log(updatedCard);
+    setCards([
+      ...cards.slice(0, index),
+      updatedCard,
+      ...cards.slice(index + 1)
+    ]);
+  }
+
+  useEffect(() => console.log(cards), [cards]);
+
   return (
     <Router>
       <Grid>
@@ -61,6 +77,7 @@ export default function App() {
                 card={findCard(props.match.params.id)}
                 onDelete={handleDelete}
                 {...props}
+                onUpdate={handleUpdateAbsence}
               />
             )}
           />
