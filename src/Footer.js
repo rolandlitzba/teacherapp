@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const StyledFooter = styled.footer`
   background: #fcffff;
@@ -10,6 +11,14 @@ const StyledFooter = styled.footer`
   text-align: center;
 `;
 
+const StyledBackButton = styled(NavLink)``;
+
 export default function Footer() {
-  return <StyledFooter />;
+  return (
+    <StyledFooter>
+      <StyledBackButton exact to="/">
+        Back
+      </StyledBackButton>
+    </StyledFooter>
+  );
 }
