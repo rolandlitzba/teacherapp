@@ -23,10 +23,13 @@ const Main = styled.main`
 `;
 
 const StyledAddButton = styled.button`
-  position: absolute;
-  right: 30px;
-  bottom: 60px;
+  background: none;
+  border: none;
+  bottom: 50px;
   font-size: 1.2em;
+  padding: 0;
+  position: absolute;
+  right: 10px;
 `;
 
 export default function App() {
@@ -51,9 +54,14 @@ export default function App() {
     setCards([...cards.slice(0, index), ...cards.slice(index + 1)]);
   }
 
-  function handleUpdateAbsence(editedCard) {
+  function handleUpdate(editedCard) {
     const index = cards.findIndex(card => card.id === editedCard.id);
-    const updatedCard = { ...cards[index], absence: editedCard.absence };
+    const updatedCard = {
+      ...cards[index],
+      name: editedCard.name,
+      absence: editedCard.absence,
+      comments: editedCard.comments
+    };
     setCards([
       ...cards.slice(0, index),
       updatedCard,
@@ -75,7 +83,7 @@ export default function App() {
                 card={findCard(props.match.params.id)}
                 onDelete={handleDelete}
                 {...props}
-                onUpdate={handleUpdateAbsence}
+                onUpdate={handleUpdate}
               />
             )}
           />
@@ -85,7 +93,10 @@ export default function App() {
             render={props => (
               <>
                 <StyledAddButton className="button-default" onClick={toggle}>
-                  Add Student
+                  <img
+                    src={process.env.PUBLIC_URL + '/Add.svg'}
+                    alt="Add icon"
+                  />
                 </StyledAddButton>
                 <ModalForm
                   handleSubmitForm={data => createCard(data)}
