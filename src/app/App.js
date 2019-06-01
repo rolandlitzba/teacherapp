@@ -32,7 +32,6 @@ const StyledAddButton = styled.button`
 export default function App() {
   const [cards, setCards] = useState(getLocal('cards') || mockdata);
   const { Showing, toggle } = useModalForm();
-  console.log(cards);
   useEffect(() => {
     setLocal('cards', cards);
   }, [cards]);
@@ -53,20 +52,14 @@ export default function App() {
   }
 
   function handleUpdateAbsence(editedCard) {
-    console.log(editedCard);
     const index = cards.findIndex(card => card.id === editedCard.id);
-
     const updatedCard = { ...cards[index], absence: editedCard.absence };
-
-    console.log(updatedCard);
     setCards([
       ...cards.slice(0, index),
       updatedCard,
       ...cards.slice(index + 1)
     ]);
   }
-
-  useEffect(() => console.log(cards), [cards]);
 
   return (
     <Router>
