@@ -3,6 +3,7 @@ import Header from '../Header';
 import Footer from '../Footer';
 import styled from 'styled-components';
 import CardList from '../card/CardList';
+import ClassList from '../card/ClassList';
 import GlobalStyles from '../misc/GlobalStyles';
 import DetailCard from '../card/DetailCard';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -75,9 +76,10 @@ export default function App() {
         <GlobalStyles />
         <Header />
         <Main>
-          <Route exact path="/" render={() => <CardList cards={cards} />} />
+          <Route exact path="/" render={() => <ClassList cards={cards} />} />
+          <Route exact path="/:id" render={() => <CardList cards={cards} />} />
           <Route
-            path="/details/:id"
+            path="/classlist/:id"
             render={props => (
               <DetailCard
                 card={findCard(props.match.params.id)}
