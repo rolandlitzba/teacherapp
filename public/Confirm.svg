@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="78px" height="78px" viewBox="0 0 78 78" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="30" cy="30" r="30"></circle>
+        <filter x="-20.0%" y="-20.0%" width="150.0%" height="150.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="2" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="3" dy="3" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.898039216   0 0 0 0 0.909803922   0 0 0 0 0.937254902  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Classes-Overview-Copy" transform="translate(-74.000000, -295.000000)">
+            <g id="Group" transform="translate(80.000000, 301.000000)">
+                <g id="Oval">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#7ABABB" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <g id="Check" transform="translate(12.173913, 18.260870)" fill="#FFFFFF">
+                    <path d="M36.8249334,0.562231063 C36.0688317,-0.187410354 34.8439458,-0.187410354 34.0878442,0.562231063 L14.7991118,19.7099715 L3.25685826,8.25208668 C2.4938049,7.54626339 1.30472048,7.56709004 0.567224505,8.29919525 C-0.170271468,9.03130046 -0.191251475,10.2116932 0.519769056,10.969169 L13.4305672,23.785595 C14.1866688,24.5352364 15.4115547,24.5352364 16.1676564,23.785595 L36.8249334,3.27931338 C37.5800947,2.5287385 37.5800947,1.31280595 36.8249334,0.562231063 L36.8249334,0.562231063 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

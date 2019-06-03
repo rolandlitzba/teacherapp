@@ -3,13 +3,13 @@
     "name": "Jyn Erso",
     "id": "1",
     "absence": "0",
-    "comments": ""
+    "comments": "no comments"
   },
   {
     "name": "Chirrut Imwe",
     "id": "2",
     "absence": "1",
-    "comments": ""
+    "comments": "likes baby cittens"
   },
   {
     "name": "Baze Malbus",
@@ -21,6 +21,6 @@
     "name": "Bodhi Rook",
     "id": "4",
     "absence": "20",
-    "comments": ""
+    "comments": "no comments"
   }
 ]

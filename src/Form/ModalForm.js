@@ -48,7 +48,10 @@ const StyledButtonWrapper = styled.div`
 `;
 
 const StyledButton = styled.button`
+  background: none;
+  border: none;
   font-size: 1.2em;
+  padding: 0;
 `;
 
 export default function modalForm({
@@ -93,8 +96,20 @@ export default function modalForm({
                 />
               </StyledLabel>
               <StyledButtonWrapper>
-                <StyledButton>confirm</StyledButton>
-                <StyledButton onClick={hide}>cancel</StyledButton>
+                <StyledButton>
+                  <img
+                    src={process.env.PUBLIC_URL + '/confirm.svg'}
+                    width="80%"
+                    alt="Confirm icon"
+                  />
+                </StyledButton>
+                <StyledButton onClick={hide}>
+                  <img
+                    src={process.env.PUBLIC_URL + '/Cancel.svg'}
+                    width="80%"
+                    alt="Cancel icon"
+                  />
+                </StyledButton>
               </StyledButtonWrapper>
             </StyledForm>
           </StyledWrapper>
