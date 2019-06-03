@@ -6,9 +6,8 @@ const StyledFooter = styled.footer`
   background: #fcffff;
   border-top: solid #e5e8ef;
   color: #818988;
-  font-size: 1.2em;
-  padding: 12px;
-  text-align: center;
+  padding: 10px 40px;
+  text-align: left;
 `;
 
 const StyledBackButton = styled(NavLink)``;
@@ -17,7 +16,11 @@ export default function Footer() {
   return (
     <StyledFooter>
       <StyledBackButton exact to="/">
-        Back
+        <img
+          src={process.env.PUBLIC_URL + '/Back.svg'}
+          width="5%"
+          alt="Back icon"
+        />
       </StyledBackButton>
     </StyledFooter>
   );
