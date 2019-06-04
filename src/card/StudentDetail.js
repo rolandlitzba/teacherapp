@@ -21,8 +21,11 @@ const StyledStudentInformation = styled.p`
   margin: 0 0 30px;
 `;
 
-export default function StudentDetail(card) {
-  const { name, absence, comments } = card;
+export default function StudentDetail({ cards, match }) {
+  const selectedStudent = cards.students.find(
+    student => student.id === match.params.studentId
+  );
+  const { name, absence, comments } = selectedStudent;
   return (
     <StyledCardDetails>
       <StyledLabel>

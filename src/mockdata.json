@@ -8,13 +8,13 @@
           "name": "Jyn Erso",
           "id": "1",
           "absence": "0",
-          "comments": ""
+          "comments": "no comments"
         },
         {
           "name": "Chirrut Imwe",
           "id": "2",
           "absence": "1",
-          "comments": ""
+          "comments": "many comments"
         }
       ]
     },
@@ -26,13 +26,13 @@
           "name": "Max Mustermann",
           "id": "1",
           "absence": "0",
-          "comments": ""
+          "comments": "some comments"
         },
         {
           "name": "Maxi Musterfrau",
           "id": "2",
           "absence": "1",
-          "comments": ""
+          "comments": "one comment"
         }
       ]
     }

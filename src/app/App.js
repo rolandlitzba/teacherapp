@@ -53,15 +53,7 @@ export default function App() {
     return card;
   }
 
-  function findStudent(id) {
-    const student = cards.classes.find(item =>
-      item.students.find(card => card.id === id)
-    );
-    console.log(student);
-    return student;
-  }
-
-  function findStudentsByClassId(id) {
+  function findClassById(id) {
     const selectedClass = cards.classes.find(card => card.id === id);
     return selectedClass;
   }
@@ -103,16 +95,17 @@ export default function App() {
               exact
               path="/classes/:id"
               render={props => (
-                <ClassListing
-                  cards={findStudentsByClassId(props.match.params.id)}
-                />
+                <ClassListing cards={findClassById(props.match.params.id)} />
               )}
             />
             <Route
               exact
-              path="/student/:id"
+              path="/classes/:classId/student/:studentId"
               render={props => (
-                <StudentDetail cards={findStudent(props.match.params.id)} />
+                <StudentDetail
+                  cards={findClassById(props.match.params.classId)}
+                  {...props}
+                />
               )}
             />
 

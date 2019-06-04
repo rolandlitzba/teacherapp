@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Card from './Card';
+/*import Card from './Card';*/
 
 const StyledCardList = styled.section`
   background: #fcffff;
