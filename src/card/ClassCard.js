@@ -21,9 +21,9 @@ const StyledStudentInformation = styled.p`
 `;
 
 export default function Card(cards) {
-  const { classname } = cards.card;
+  const { classname, id } = cards.card;
   return (
-    <StyledCard to={`/${classname}`}>
+    <StyledCard to={`/classes/${id}`}>
       <StyledStudentInformation>{classname}</StyledStudentInformation>
     </StyledCard>
   );

@@ -6,10 +6,13 @@ import CardList from '../card/CardList';
 import ClassList from '../card/ClassList';
 import GlobalStyles from '../misc/GlobalStyles';
 import DetailCard from '../card/DetailCard';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ModalForm from '../Form/ModalForm';
 import useModalForm from '../Form/useModalForm';
 import { getLocal, setLocal } from '../services';
+import Home from '../Home';
+import ClassListing from '../card/ClassListing';
+import StudentDetail from '../card/StudentDetail';
 
 const mockdata = require('../mockdata.json');
 
@@ -50,6 +53,19 @@ export default function App() {
     return card;
   }
 
+  function findStudent(id) {
+    const student = cards.classes.find(item =>
+      item.students.find(card => card.id === id)
+    );
+    console.log(student);
+    return student;
+  }
+
+  function findStudentsByClassId(id) {
+    const selectedClass = cards.classes.find(card => card.id === id);
+    return selectedClass;
+  }
+
   function handleDelete(id) {
     const index = cards.findIndex(card => card.id === id);
     setCards([...cards.slice(0, index), ...cards.slice(index + 1)]);
@@ -76,39 +92,68 @@ export default function App() {
         <GlobalStyles />
         <Header />
         <Main>
-          <Route exact path="/" render={() => <ClassList cards={cards} />} />
-          <Route exact path="/:id" render={() => <CardList cards={cards} />} />
-          <Route
-            path="/classlist/:id"
-            render={props => (
-              <DetailCard
-                card={findCard(props.match.params.id)}
-                onDelete={handleDelete}
-                {...props}
-                onUpdate={handleUpdate}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <>
-                <StyledAddButton className="button-default" onClick={toggle}>
-                  <img
-                    src={process.env.PUBLIC_URL + '/Add.svg'}
-                    alt="Add icon"
-                  />
-                </StyledAddButton>
-                <ModalForm
-                  handleSubmitForm={data => createCard(data)}
-                  history={props.history}
-                  Showing={Showing}
-                  hide={toggle}
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route
+              exact
+              path="/classes"
+              render={() => <ClassList cards={cards} />}
+            />
+            <Route
+              exact
+              path="/classes/:id"
+              render={props => (
+                <ClassListing
+                  cards={findStudentsByClassId(props.match.params.id)}
                 />
-              </>
-            )}
-          />
+              )}
+            />
+            <Route
+              exact
+              path="/student/:id"
+              render={props => (
+                <StudentDetail cards={findStudent(props.match.params.id)} />
+              )}
+            />
+
+            <Route
+              exact
+              path="/:id"
+              render={() => <CardList cards={cards} />}
+            />
+            <Route
+              exact
+              path="/classlist/:id"
+              render={props => (
+                <DetailCard
+                  card={findCard(props.match.params.id)}
+                  onDelete={handleDelete}
+                  {...props}
+                  onUpdate={handleUpdate}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <>
+                  <StyledAddButton className="button-default" onClick={toggle}>
+                    <img
+                      src={process.env.PUBLIC_URL + '/Add.svg'}
+                      alt="Add icon"
+                    />
+                  </StyledAddButton>
+                  <ModalForm
+                    handleSubmitForm={data => createCard(data)}
+                    history={props.history}
+                    Showing={Showing}
+                    hide={toggle}
+                  />
+                </>
+              )}
+            />
+          </Switch>
         </Main>
         <Footer />
       </Grid>
