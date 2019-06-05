@@ -21,13 +21,35 @@ const StyledStudentInformation = styled.p`
   margin: 0 0 30px;
 `;
 
-export default function SelectedStudent({ cards, match }) {
+const StyledDeleteButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  margin: 10px 0;
+  justify-self: right;
+  width: 20%;
+`;
+
+export default function SelectedStudent({ cards, match, onDelete, history }) {
   const selectedStudent = cards.students.find(
     student => student.id === match.params.studentId
   );
-  const { name, absence, comments } = selectedStudent;
+  const { name, absence, comments, id } = selectedStudent;
+
+  function onDeleteClick() {
+    onDelete(id, cards);
+    history.push('/classes');
+  }
+
   return (
     <StyledCardDetails>
+      <StyledDeleteButton onClick={onDeleteClick}>
+        <img
+          src={process.env.PUBLIC_URL + '/Trash.svg'}
+          width="80%"
+          alt="Trash icon"
+        />
+      </StyledDeleteButton>
       <StyledLabel>
         Name:
         <StyledStudentInformation name="name">{name}</StyledStudentInformation>

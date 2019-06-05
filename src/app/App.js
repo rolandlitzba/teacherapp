@@ -38,7 +38,6 @@ const StyledAddButton = styled.button`
 export default function App() {
   const [classes, setClasses] = useState(getLocal('classes') || mockdata);
   const { Showing, toggle } = useModalForm();
-  console.log(classes);
   useEffect(() => {
     setLocal('classes', classes);
   }, [classes]);
@@ -60,9 +59,29 @@ export default function App() {
     return selectedClass;
   }
 
-  function handleClassdelete(id) {
+  function handleClassDelete(id) {
     const index = classes.findIndex(card => card.id === id);
     setClasses([...classes.slice(0, index), ...classes.slice(index + 1)]);
+  }
+
+  function handleStudentDelete(id, data) {
+    const classIndex = classes.findIndex(card => card.id === data.id);
+    const studentIndex = classes[classIndex].students.findIndex(
+      student => student.id === id
+    );
+    const { students } = classes[classIndex];
+
+    setClasses([
+      classes[classIndex],
+      {
+        classname: data.classname,
+        id: data.id,
+        students: [
+          ...students.slice(0, studentIndex),
+          ...students.slice(studentIndex + 1)
+        ]
+      }
+    ]);
   }
 
   return (
@@ -104,7 +123,7 @@ export default function App() {
             render={props => (
               <SelectedClass
                 card={findClassById(props.match.params.id)}
-                onDelete={handleClassdelete}
+                onDelete={handleClassDelete}
                 {...props}
               />
             )}
@@ -115,6 +134,7 @@ export default function App() {
             render={props => (
               <SelectedStudent
                 cards={findClassById(props.match.params.classId)}
+                onDelete={handleStudentDelete}
                 {...props}
               />
             )}
@@ -132,6 +152,20 @@ export default function App() {
 }
 
 /*
+  function handleUpdate(editedCard) {
+    const index = cards.findIndex(card => card.id === editedCard.id);
+    const updatedCard = {
+      ...cards[index],
+      name: editedCard.name,
+      absence: editedCard.absence,
+      comments: editedCard.comments
+    };
+    setCards([
+      ...cards.slice(0, index),
+      updatedCard,
+      ...cards.slice(index + 1)
+    ]
+
   function handleUpdate(editedCard) {
     const index = cards.findIndex(card => card.id === editedCard.id);
     const updatedCard = {

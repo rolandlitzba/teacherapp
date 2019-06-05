@@ -14,6 +14,12 @@
         "id": "2",
         "absence": "1",
         "comments": "many comments"
+      },
+      {
+        "name": "Baze Malbus",
+        "id": "3",
+        "absence": "1",
+        "comments": "many comments"
       }
     ]
   },
@@ -23,13 +29,13 @@
     "students": [
       {
         "name": "Max Mustermann",
-        "id": "1",
+        "id": "3",
         "absence": "0",
         "comments": "some comments"
       },
       {
         "name": "Maxi Musterfrau",
-        "id": "2",
+        "id": "4",
         "absence": "1",
         "comments": "one comment"
       }
