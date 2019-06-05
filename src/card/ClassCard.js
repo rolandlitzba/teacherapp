@@ -14,17 +14,17 @@ const StyledCard = styled(Link)`
   flex-direction: column;
 `;
 
-const StyledStudentInformation = styled.p`
+const StyledInformation = styled.p`
   color: #818988;
   margin: 0;
   padding: 10px;
 `;
 
-export default function Card(cards) {
-  const { classname, id } = cards.card;
+export default function Card({ classItem }) {
+  const { classname, id } = classItem;
   return (
     <StyledCard to={`/classes/${id}`}>
-      <StyledStudentInformation>{classname}</StyledStudentInformation>
+      <StyledInformation>{classname}</StyledInformation>
     </StyledCard>
   );
 }

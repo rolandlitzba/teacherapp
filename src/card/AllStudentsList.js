@@ -18,7 +18,7 @@ export default function CardList({ cards }) {
   );
 }
 */
-export default function ClassList({ cards }) {
+export default function AllStudentsList({ cards }) {
   return (
     <StyledCardList>
       {cards.classes.map(card => {

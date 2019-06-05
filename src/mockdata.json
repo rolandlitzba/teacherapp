@@ -1,40 +1,38 @@
-{
-  "classes": [
-    {
-      "classname": "5a",
-      "id": "a",
-      "students": [
-        {
-          "name": "Jyn Erso",
-          "id": "1",
-          "absence": "0",
-          "comments": "no comments"
-        },
-        {
-          "name": "Chirrut Imwe",
-          "id": "2",
-          "absence": "1",
-          "comments": "many comments"
-        }
-      ]
-    },
-    {
-      "classname": "6b",
-      "id": "b",
-      "students": [
-        {
-          "name": "Max Mustermann",
-          "id": "1",
-          "absence": "0",
-          "comments": "some comments"
-        },
-        {
-          "name": "Maxi Musterfrau",
-          "id": "2",
-          "absence": "1",
-          "comments": "one comment"
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "classname": "5a",
+    "id": "a",
+    "students": [
+      {
+        "name": "Jyn Erso",
+        "id": "1",
+        "absence": "0",
+        "comments": "no comments"
+      },
+      {
+        "name": "Chirrut Imwe",
+        "id": "2",
+        "absence": "1",
+        "comments": "many comments"
+      }
+    ]
+  },
+  {
+    "classname": "6b",
+    "id": "b",
+    "students": [
+      {
+        "name": "Max Mustermann",
+        "id": "1",
+        "absence": "0",
+        "comments": "some comments"
+      },
+      {
+        "name": "Maxi Musterfrau",
+        "id": "2",
+        "absence": "1",
+        "comments": "one comment"
+      }
+    ]
+  }
+]

@@ -21,7 +21,7 @@ const StyledStudentInformation = styled.p`
   margin: 0 0 30px;
 `;
 
-export default function StudentDetail({ cards, match }) {
+export default function SelectedStudent({ cards, match }) {
   const selectedStudent = cards.students.find(
     student => student.id === match.params.studentId
   );

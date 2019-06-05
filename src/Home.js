@@ -6,8 +6,14 @@ const StyledNavComponentes = styled(Link)``;
 
 export default function Home() {
   return (
-    <StyledNavComponentes to={`/classes`}>
-      <div>Classes</div>
-    </StyledNavComponentes>
+    <>
+      <StyledNavComponentes to={`/classes`}>
+        <div>Classes</div>
+      </StyledNavComponentes>
+
+      <StyledNavComponentes to={`/students`}>
+        <div>Students</div>
+      </StyledNavComponentes>
+    </>
   );
 }

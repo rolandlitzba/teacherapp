@@ -7,11 +7,11 @@ const StyledCardList = styled.section`
   padding: 20px;
 `;
 
-export default function ClassList({ cards }) {
+export default function ClassesList({ classes }) {
   return (
     <StyledCardList>
-      {cards.classes.map(card => {
-        return <ClassCard key={card.id} card={card} />;
+      {classes.map(classItem => {
+        return <ClassCard key={classItem.id} classItem={classItem} />;
       })}
     </StyledCardList>
   );
