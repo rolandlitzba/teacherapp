@@ -70,17 +70,19 @@ export default function App() {
       student => student.id === id
     );
     const { students } = classes[classIndex];
-
+    const updatedClass = {
+      ...classes[classIndex],
+      classname: data.classname,
+      id: data.id,
+      students: [
+        ...students.slice(0, studentIndex),
+        ...students.slice(studentIndex + 1)
+      ]
+    };
     setClasses([
-      classes[classIndex],
-      {
-        classname: data.classname,
-        id: data.id,
-        students: [
-          ...students.slice(0, studentIndex),
-          ...students.slice(studentIndex + 1)
-        ]
-      }
+      ...classes.slice(0, classIndex),
+      updatedClass,
+      ...classes.slice(classIndex + 1)
     ]);
   }
 
