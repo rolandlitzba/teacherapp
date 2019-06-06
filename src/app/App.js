@@ -65,13 +65,11 @@ export default function App() {
         { name: data.name, id: data.id, absence: '', comments: '' }
       ]
     };
-
     setClasses([
       ...classes.slice(0, classIndex),
       updatedClass,
       ...classes.slice(classIndex + 1)
     ]);
-    console.log(classes);
   }
 
   function findClassById(id) {
@@ -82,6 +80,33 @@ export default function App() {
   function handleClassDelete(id) {
     const index = classes.findIndex(card => card.id === id);
     setClasses([...classes.slice(0, index), ...classes.slice(index + 1)]);
+  }
+
+  function handleStudentUpdate(data, id) {
+    const classIndex = classes.findIndex(card => card.id === id);
+    const { students } = classes[classIndex];
+    const studentIndex = classes[classIndex].students.findIndex(
+      student => student.id === data.id
+    );
+    const updatedStudent = {
+      name: data.name,
+      id: data.id,
+      absence: data.absence,
+      comments: data.comments
+    };
+    const updatedClass = {
+      ...classes[classIndex],
+      students: [
+        ...students.slice(0, studentIndex),
+        updatedStudent,
+        ...students.slice(studentIndex + 1)
+      ]
+    };
+    setClasses([
+      ...classes.slice(0, classIndex),
+      updatedClass,
+      ...classes.slice(classIndex + 1)
+    ]);
   }
 
   function handleStudentDelete(id, data) {
@@ -179,6 +204,12 @@ export default function App() {
                 cards={findClassById(props.match.params.classId)}
                 onDelete={(id, data) => handleStudentDelete(id, data)}
                 {...props}
+                onUpdate={data =>
+                  handleStudentUpdate(
+                    data,
+                    findClassById(props.match.params.classId).id
+                  )
+                }
               />
             )}
           />

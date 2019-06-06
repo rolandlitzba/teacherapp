@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const StyledCardDetails = styled.form`
@@ -30,18 +30,109 @@ const StyledDeleteButton = styled.button`
   width: 20%;
 `;
 
-export default function SelectedStudent({ cards, match, onDelete, history }) {
+const StyledInput = styled.input`
+  color: #818988;
+  font-size: 1em;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+`;
+
+const StyledButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px 10px 10px;
+`;
+
+const StyledButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  justify-self: center;
+  margin: 10px;
+  width: 20%;
+`;
+
+export default function SelectedStudent({
+  cards,
+  match,
+  onDelete,
+  history,
+  onUpdate
+}) {
   const selectedStudent = cards.students.find(
     student => student.id === match.params.studentId
   );
   const { name, absence, comments, id } = selectedStudent;
+  const [isEditable, setIsEditable] = useState(false);
+
+  function cancelChange() {
+    setIsEditable(!isEditable);
+  }
 
   function onDeleteClick() {
     onDelete(id, cards);
     history.push('/classes');
   }
 
-  return (
+  function onFormSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    onUpdate({
+      name: form.name.value,
+      absence: form.absence.value,
+      comments: form.comments.value,
+      id
+    });
+    setIsEditable(!isEditable);
+  }
+
+  return isEditable ? (
+    <StyledCardDetails onSubmit={onFormSubmit}>
+      <StyledDeleteButton onClick={onDeleteClick}>
+        <img
+          src={process.env.PUBLIC_URL + '/Trash.svg'}
+          width="80%"
+          alt="Trash icon"
+        />
+      </StyledDeleteButton>
+      <StyledLabel>
+        Name:
+        <StyledStudentInformation>
+          <StyledInput name="name" StyledInput defaultValue={name} />
+        </StyledStudentInformation>
+      </StyledLabel>
+
+      <StyledLabel>
+        Absence:
+        <StyledStudentInformation>
+          <StyledInput
+            name="absence"
+            StyledInput
+            type="number"
+            defaultValue={absence}
+          />
+        </StyledStudentInformation>
+      </StyledLabel>
+
+      <StyledLabel>
+        Comments:
+        <StyledStudentInformation>
+          <StyledInput name="comments" defaultValue={comments} />
+        </StyledStudentInformation>
+      </StyledLabel>
+      <StyledButtonWrapper>
+        <StyledButton>
+          <img
+            src={process.env.PUBLIC_URL + '/Confirm.svg'}
+            alt="Confirm icon"
+          />
+        </StyledButton>
+        <StyledButton onClick={cancelChange}>
+          <img src={process.env.PUBLIC_URL + '/Cancel.svg'} alt="Cancel icon" />
+        </StyledButton>
+      </StyledButtonWrapper>
+    </StyledCardDetails>
+  ) : (
     <StyledCardDetails>
       <StyledDeleteButton onClick={onDeleteClick}>
         <img
@@ -66,6 +157,13 @@ export default function SelectedStudent({ cards, match, onDelete, history }) {
           {comments}
         </StyledStudentInformation>
       </StyledLabel>
+      <StyledButton onClick={() => setIsEditable(!isEditable)}>
+        <img
+          src={process.env.PUBLIC_URL + '/Edit.svg'}
+          width="80%"
+          alt="Edit icon"
+        />
+      </StyledButton>
     </StyledCardDetails>
   );
 }
