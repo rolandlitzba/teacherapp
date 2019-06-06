@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import BackButton from './BackButton';
 
 const StyledFooter = styled.footer`
   background: #fcffff;
@@ -22,6 +23,7 @@ export default function Footer() {
           alt="Back icon"
         />
       </StyledBackButton>
+      <BackButton />
     </StyledFooter>
   );
 }
