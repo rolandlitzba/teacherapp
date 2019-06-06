@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import ReactDOM from 'react-dom';
 import uid from 'uid';
 
 const StyledModal = styled.div`
@@ -54,18 +54,18 @@ const StyledButton = styled.button`
   padding: 0;
 `;
 
-export default function ModalForm({
+export default function SubmitNewStudent({
   history,
-  handleSubmitForm,
+  handleNewStudentSubmit,
   Showing,
-  hide
+  hide,
+  cards
 }) {
-  const [newClass, setNewClass] = useState('');
-
+  const [newStudent, setNewStudent] = useState('');
   function onFormSubmit(event) {
     event.preventDefault();
-    handleSubmitForm({
-      classname: newClass,
+    handleNewStudentSubmit({
+      name: newStudent,
       id: uid()
     });
     history.replace('/classes');
@@ -77,18 +77,18 @@ export default function ModalForm({
         <StyledModal>
           <StyledWrapper>
             <StyledForm
-              handleSubmitForm={handleSubmitForm}
+              handleSubmitForm={handleNewStudentSubmit}
               history={history}
               hide={hide}
               onSubmit={onFormSubmit}
             >
               <StyledLabel>
-                Classname:
+                Student:
                 <StyledInput
-                  name="class"
-                  value={newClass}
-                  onChange={e => setNewClass(e.target.value)}
-                  placeholder="Insert new class here"
+                  name="student"
+                  value={newStudent}
+                  onChange={e => setNewStudent(e.target.value)}
+                  placeholder="Insert new student here"
                 />
               </StyledLabel>
               <StyledButtonWrapper>

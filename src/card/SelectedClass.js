@@ -18,7 +18,6 @@ const StyledCardList = styled.section`
 const StyledItem = styled(Link)`
   margin: 0 0 20px;
   text-decoration: none;
-
   &:visited {
     color: #818988;
     text-decoration: none;

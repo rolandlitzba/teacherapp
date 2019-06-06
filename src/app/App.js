@@ -12,6 +12,7 @@ import { getLocal, setLocal } from '../services';
 import Home from '../Home';
 import SelectedClass from '../card/SelectedClass';
 import SelectedStudent from '../card/SelectedStudent';
+import SubmitNewStudent from '../Form/SubmitNewStudent';
 
 const mockdata = require('../mockdata.json');
 
@@ -42,7 +43,7 @@ export default function App() {
     setLocal('classes', classes);
   }, [classes]);
 
-  function createCard(data) {
+  function createClass(data) {
     const newClass = [
       ...classes,
       {
@@ -52,6 +53,25 @@ export default function App() {
       }
     ];
     setClasses(newClass);
+  }
+
+  function createStudent(data, id) {
+    const classIndex = classes.findIndex(card => card.id === id);
+    const { students } = classes[classIndex];
+    const updatedClass = {
+      ...classes[classIndex],
+      students: [
+        ...students,
+        { name: data.name, id: data.id, absence: '', comments: '' }
+      ]
+    };
+
+    setClasses([
+      ...classes.slice(0, classIndex),
+      updatedClass,
+      ...classes.slice(classIndex + 1)
+    ]);
+    console.log(classes);
   }
 
   function findClassById(id) {
@@ -110,7 +130,7 @@ export default function App() {
                   />
                 </StyledAddButton>
                 <ModalForm
-                  handleSubmitForm={data => createCard(data)}
+                  handleSubmitForm={data => createClass(data)}
                   history={props.history}
                   Showing={Showing}
                   hide={toggle}
@@ -118,7 +138,6 @@ export default function App() {
               </>
             )}
           />
-
           <Route
             exact
             path="/classes/:id"
@@ -132,11 +151,35 @@ export default function App() {
           />
           <Route
             exact
+            path="/classes/:id"
+            render={props => (
+              <>
+                <StyledAddButton className="button-default" onClick={toggle}>
+                  <img
+                    src={process.env.PUBLIC_URL + '/Add.svg'}
+                    alt="Add icon"
+                  />
+                </StyledAddButton>
+                <SubmitNewStudent
+                  handleNewStudentSubmit={data =>
+                    createStudent(data, findClassById(props.match.params.id).id)
+                  }
+                  cards={findClassById(props.match.params.id)}
+                  history={props.history}
+                  Showing={Showing}
+                  hide={toggle}
+                  {...props}
+                />
+              </>
+            )}
+          />
+          <Route
+            exact
             path="/classes/:classId/student/:studentId"
             render={props => (
               <SelectedStudent
                 cards={findClassById(props.match.params.classId)}
-                onDelete={handleStudentDelete}
+                onDelete={(id, data) => handleStudentDelete(id, data)}
                 {...props}
               />
             )}
@@ -154,20 +197,6 @@ export default function App() {
 }
 
 /*
-  function handleUpdate(editedCard) {
-    const index = cards.findIndex(card => card.id === editedCard.id);
-    const updatedCard = {
-      ...cards[index],
-      name: editedCard.name,
-      absence: editedCard.absence,
-      comments: editedCard.comments
-    };
-    setCards([
-      ...cards.slice(0, index),
-      updatedCard,
-      ...cards.slice(index + 1)
-    ]
-
   function handleUpdate(editedCard) {
     const index = cards.findIndex(card => card.id === editedCard.id);
     const updatedCard = {
