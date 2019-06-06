@@ -58,8 +58,7 @@ export default function SubmitNewStudent({
   history,
   handleNewStudentSubmit,
   Showing,
-  hide,
-  cards
+  hide
 }) {
   const [newStudent, setNewStudent] = useState('');
   function onFormSubmit(event) {
@@ -68,7 +67,6 @@ export default function SubmitNewStudent({
       name: newStudent,
       id: uid()
     });
-    history.replace('/classes');
     hide();
   }
 

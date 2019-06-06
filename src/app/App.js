@@ -165,10 +165,8 @@ export default function App() {
                     createStudent(data, findClassById(props.match.params.id).id)
                   }
                   cards={findClassById(props.match.params.id)}
-                  history={props.history}
                   Showing={Showing}
                   hide={toggle}
-                  {...props}
                 />
               </>
             )}
@@ -211,7 +209,6 @@ export default function App() {
       ...cards.slice(index + 1)
     ]);
   }
-
           <Route
             exact
             path="/classlist/:id"
@@ -223,24 +220,5 @@ export default function App() {
               />
             )}
           />
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <>
-                <StyledAddButton className="button-default" onClick={toggle}>
-                  <img
-                    src={process.env.PUBLIC_URL + '/Add.svg'}
-                    alt="Add icon"
-                  />
-                </StyledAddButton>
-                <ModalForm
-                  handleSubmitForm={data => createCard(data)}
-                  history={props.history}
-                  Showing={Showing}
-                  hide={toggle}
-                />
-              </>
-            )}
-          />
+
  */
