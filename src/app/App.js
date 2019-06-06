@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../Header';
-import Footer from '../Footer';
 import styled from 'styled-components';
-import AllStudentsList from '../card/AllStudentsList';
-import ClassesList from '../card/ClassesList';
 import GlobalStyles from '../misc/GlobalStyles';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Header from '../Header';
+import Footer from '../Footer';
+import Home from '../Home';
+import AllStudentsList from '../card/AllStudentsList';
+import ClassesList from '../card/ClassesList';
 import ModalForm from '../Form/ModalForm';
 import useModalForm from '../Form/useModalForm';
 import { getLocal, setLocal } from '../services';
-import Home from '../Home';
 import SelectedClass from '../card/SelectedClass';
 import SelectedStudent from '../card/SelectedStudent';
 import SubmitNewStudent from '../Form/SubmitNewStudent';
@@ -224,32 +224,3 @@ export default function App() {
     </Router>
   );
 }
-
-/*
-  function handleUpdate(editedCard) {
-    const index = cards.findIndex(card => card.id === editedCard.id);
-    const updatedCard = {
-      ...cards[index],
-      name: editedCard.name,
-      absence: editedCard.absence,
-      comments: editedCard.comments
-    };
-    setCards([
-      ...cards.slice(0, index),
-      updatedCard,
-      ...cards.slice(index + 1)
-    ]);
-  }
-          <Route
-            exact
-            path="/classlist/:id"
-            render={props => (
-              <DetailCard
-                onDelete={handleDelete}
-                {...props}
-                onUpdate={handleUpdate}
-              />
-            )}
-          />
-
- */

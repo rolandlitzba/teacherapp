@@ -1,31 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-/*import Card from './Card';*/
 
 const StyledCardList = styled.section`
   background: #fcffff;
   padding: 20px;
 `;
 
-/*
-export default function CardList({ cards }) {
+export default function AllStudentsList({ classes }) {
   return (
     <StyledCardList>
-      {cards.classes.map(card => (
-        <Card key={card.id} card={card} />
-      ))}
-    </StyledCardList>
-  );
-}
-*/
-export default function AllStudentsList({ cards }) {
-  return (
-    <StyledCardList>
-      {cards.classes.map(card => {
+      {classes.map(classItem => {
         return (
           <div>
-            <h1 key={card.id}>{card.classname}</h1>
-            {card.students.map(student => (
+            <h1 key={classItem.id}>{classItem.classname}</h1>
+            {classItem.students.map(student => (
               <div>
                 <h3 key={student.id}>{student.name}</h3>
               </div>
