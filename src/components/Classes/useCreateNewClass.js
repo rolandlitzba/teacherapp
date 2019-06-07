@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useSubmitNewClass = () => {
+const useCreateNewClass = () => {
   const [Showing, setShowing] = useState(false);
 
   function toggle() {
@@ -13,4 +13,4 @@ const useSubmitNewClass = () => {
   };
 };
 
-export default useSubmitNewClass;
+export default useCreateNewClass;

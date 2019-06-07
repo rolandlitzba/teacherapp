@@ -8,11 +8,11 @@ import Home from '../components/Home/Home';
 import { getLocal, setLocal } from '../services';
 import ClassList from '../components/Classes/ClassList';
 import ClassSelection from '../components/Classes/ClassSelection';
-import AllClasses from '../components/StudentOverview/AllStudents';
-import StudentSelection from '../components/StudentOverview/StudentSelection';
-import SubmitNewStudent from '../components/Form/SubmitNewStudent';
-import SubmitNewClass from '../components/Form/SubmitNewClass';
-import useSubmitNewClass from '../components/Form/useSubmitNewClass';
+import AllClasses from '../components/Students/AllStudents';
+import SelectedStudent from '../components/Students/SelectedStudent';
+import CreateNewStudent from '../components/Students/CreateNewStudent';
+import CreateNewClass from '../components/Classes/CreateNewClass';
+import useCreateNewClass from '../components/Classes/useCreateNewClass';
 
 const mockdata = require('../mockdata.json');
 
@@ -38,12 +38,12 @@ const StyledAddButton = styled.button`
 
 export default function App() {
   const [classes, setClasses] = useState(getLocal('classes') || mockdata);
-  const { Showing, toggle } = useSubmitNewClass();
+  const { Showing, toggle } = useCreateNewClass();
   useEffect(() => {
     setLocal('classes', classes);
   }, [classes]);
 
-  function handleNewClass(data) {
+  function createNewClass(data) {
     const newClass = [
       ...classes,
       {
@@ -55,7 +55,7 @@ export default function App() {
     setClasses(newClass);
   }
 
-  function handleNewStudent(data, id) {
+  function createNewStudent(data, id) {
     const classIndex = classes.findIndex(card => card.id === id);
     const { students } = classes[classIndex];
     const updatedClass = {
@@ -77,12 +77,12 @@ export default function App() {
     return selectedClass;
   }
 
-  function handleClassDelete(id) {
+  function deleteClassById(id) {
     const index = classes.findIndex(card => card.id === id);
     setClasses([...classes.slice(0, index), ...classes.slice(index + 1)]);
   }
 
-  function handleStudentUpdate(data, id) {
+  function updateStudentById(data, id) {
     const classIndex = classes.findIndex(card => card.id === id);
     const { students } = classes[classIndex];
     const studentIndex = classes[classIndex].students.findIndex(
@@ -109,7 +109,7 @@ export default function App() {
     ]);
   }
 
-  function handleStudentDelete(id, data) {
+  function deleteStudentById(id, data) {
     const classIndex = classes.findIndex(card => card.id === data.id);
     const studentIndex = classes[classIndex].students.findIndex(
       student => student.id === id
@@ -154,8 +154,8 @@ export default function App() {
                     alt="Add icon"
                   />
                 </StyledAddButton>
-                <SubmitNewClass
-                  handleNewClass={data => handleNewClass(data)}
+                <CreateNewClass
+                  handleNewClass={data => createNewClass(data)}
                   history={props.history}
                   Showing={Showing}
                   hide={toggle}
@@ -169,7 +169,7 @@ export default function App() {
             render={props => (
               <ClassSelection
                 card={findClassById(props.match.params.id)}
-                handleDelete={handleClassDelete}
+                handleDelete={deleteClassById}
                 {...props}
               />
             )}
@@ -185,14 +185,14 @@ export default function App() {
                     alt="Add icon"
                   />
                 </StyledAddButton>
-                <SubmitNewStudent
-                  handleNewStudentSubmit={data =>
-                    handleNewStudent(
+                <CreateNewStudent
+                  onNewStudentSubmit={data =>
+                    createNewStudent(
                       data,
                       findClassById(props.match.params.id).id
                     )
                   }
-                  cards={findClassById(props.match.params.id)}
+                  classes={findClassById(props.match.params.id)}
                   Showing={Showing}
                   hide={toggle}
                 />
@@ -203,12 +203,12 @@ export default function App() {
             exact
             path="/classes/:classId/student/:studentId"
             render={props => (
-              <StudentSelection
-                cards={findClassById(props.match.params.classId)}
-                handleDelete={(id, data) => handleStudentDelete(id, data)}
+              <SelectedStudent
+                classes={findClassById(props.match.params.classId)}
+                onDelete={(id, data) => deleteStudentById(id, data)}
                 {...props}
-                handleUpdate={data =>
-                  handleStudentUpdate(
+                onUpdate={data =>
+                  updateStudentById(
                     data,
                     findClassById(props.match.params.classId).id
                   )

@@ -54,16 +54,16 @@ const StyledButton = styled.button`
   padding: 0;
 `;
 
-export default function SubmitNewStudent({
+export default function CreateNewStudent({
   history,
-  handleNewStudentSubmit,
+  onNewStudentSubmit,
   Showing,
   hide
 }) {
   const [newStudent, setNewStudent] = useState('');
   function onFormSubmit(event) {
     event.preventDefault();
-    handleNewStudentSubmit({
+    onNewStudentSubmit({
       name: newStudent,
       id: uid()
     });
@@ -75,7 +75,7 @@ export default function SubmitNewStudent({
         <StyledModal>
           <StyledWrapper>
             <StyledForm
-              handleSubmitForm={handleNewStudentSubmit}
+              onFormSubmit={onNewStudentSubmit}
               history={history}
               hide={hide}
               onSubmit={onFormSubmit}

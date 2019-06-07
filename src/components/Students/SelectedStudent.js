@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import InputGroup from '../Common/InputGroup';
 
 const StyledCardDetails = styled.form`
   background: #fcffff;
@@ -52,14 +53,14 @@ const StyledButton = styled.button`
   width: 20%;
 `;
 
-export default function StudentSelection({
-  cards,
+export default function SelectedStudent({
+  classes,
   match,
-  handleDelete,
+  onDelete,
   history,
-  handleUpdate
+  onUpdate
 }) {
-  const selectedStudent = cards.students.find(
+  const selectedStudent = classes.students.find(
     student => student.id === match.params.studentId
   );
   const { name, absence, comments, id } = selectedStudent;
@@ -70,14 +71,14 @@ export default function StudentSelection({
   }
 
   function onDeleteClick() {
-    handleDelete(id, cards);
+    onDelete(id, classes);
     history.push('/classes');
   }
 
   function onFormSubmit(event) {
     event.preventDefault();
     const form = event.target;
-    handleUpdate({
+    onUpdate({
       name: form.name.value,
       absence: form.absence.value,
       comments: form.comments.value,
@@ -95,25 +96,19 @@ export default function StudentSelection({
           alt="Trash icon"
         />
       </StyledDeleteButton>
-      <StyledLabel>
+      <InputGroup placeholder="huhu" value={name} />
+      {/* <StyledLabel>
         Name:
         <StyledStudentInformation>
-          <StyledInput name="name" StyledInput defaultValue={name} />
+          <StyledInput name="name" defaultValue={name} />
         </StyledStudentInformation>
-      </StyledLabel>
-
+      </StyledLabel> */}
       <StyledLabel>
         Absence:
         <StyledStudentInformation>
-          <StyledInput
-            name="absence"
-            StyledInput
-            type="number"
-            defaultValue={absence}
-          />
+          <StyledInput name="absence" type="number" defaultValue={absence} />
         </StyledStudentInformation>
       </StyledLabel>
-
       <StyledLabel>
         Comments:
         <StyledStudentInformation>
@@ -170,3 +165,20 @@ export default function StudentSelection({
     </StyledCardDetails>
   );
 }
+
+/*
+
+const options = ["name", "comments", "absence"]
+
+{options.map(option => {return (<StyledInformation{"option"}/>)})}
+
+function StyledInformation(option){
+  return (<StyledLabel>
+  {option}:
+  <StyledStudentInformation name={option}>
+    {option}
+  </StyledStudentInformation>
+  </StyledLabel>)
+}
+
+*/

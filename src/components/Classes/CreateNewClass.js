@@ -54,7 +54,7 @@ const StyledButton = styled.button`
   padding: 0;
 `;
 
-export default function SubmitNewClass({
+export default function CreateNewClass({
   history,
   handleNewClass,
   Showing,
