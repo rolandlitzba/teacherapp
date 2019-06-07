@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import ReactDOM from 'react-dom';
+import styled from 'styled-components';
 import uid from 'uid';
 
 const StyledModal = styled.div`
@@ -54,19 +54,21 @@ const StyledButton = styled.button`
   padding: 0;
 `;
 
-export default function SubmitNewStudent({
+export default function SubmitNewClass({
   history,
-  handleNewStudentSubmit,
+  handleNewClass,
   Showing,
   hide
 }) {
-  const [newStudent, setNewStudent] = useState('');
+  const [newClass, setNewClass] = useState('');
+
   function onFormSubmit(event) {
     event.preventDefault();
-    handleNewStudentSubmit({
-      name: newStudent,
+    handleNewClass({
+      classname: newClass,
       id: uid()
     });
+    history.replace('/classes');
     hide();
   }
 
@@ -74,32 +76,27 @@ export default function SubmitNewStudent({
     ? ReactDOM.createPortal(
         <StyledModal>
           <StyledWrapper>
-            <StyledForm
-              handleSubmitForm={handleNewStudentSubmit}
-              history={history}
-              hide={hide}
-              onSubmit={onFormSubmit}
-            >
+            <StyledForm history={history} hide={hide} onSubmit={onFormSubmit}>
               <StyledLabel>
-                Student:
+                Classname:
                 <StyledInput
-                  name="student"
-                  value={newStudent}
-                  onChange={e => setNewStudent(e.target.value)}
-                  placeholder="Insert new student here"
+                  name="class"
+                  value={newClass}
+                  onChange={e => setNewClass(e.target.value)}
+                  placeholder="Insert new class here"
                 />
               </StyledLabel>
               <StyledButtonWrapper>
                 <StyledButton>
                   <img
-                    src={process.env.PUBLIC_URL + '/confirm.svg'}
+                    src={process.env.PUBLIC_URL + '/assets/confirm.svg'}
                     width="80%"
                     alt="Confirm icon"
                   />
                 </StyledButton>
                 <StyledButton onClick={hide}>
                   <img
-                    src={process.env.PUBLIC_URL + '/Cancel.svg'}
+                    src={process.env.PUBLIC_URL + '/assets/Cancel.svg'}
                     width="80%"
                     alt="Cancel icon"
                   />

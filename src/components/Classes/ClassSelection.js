@@ -28,16 +28,16 @@ const StyledDeleteButton = styled.button`
   background: none;
   border: none;
   font-size: 1.2em;
-  margin: 10px 0;
   justify-self: right;
+  margin: 10px 0;
   width: 20%;
 `;
 
-export default function SelectedClass({ card, onDelete, history }) {
+export default function ClassSelection({ card, handleDelete, history }) {
   const { classname, students, id } = card;
 
   function onDeleteClick() {
-    onDelete(id);
+    handleDelete(id);
     history.push('/classes');
   }
 
@@ -45,7 +45,7 @@ export default function SelectedClass({ card, onDelete, history }) {
     <StyledCardList>
       <StyledDeleteButton onClick={onDeleteClick}>
         <img
-          src={process.env.PUBLIC_URL + '/Trash.svg'}
+          src={process.env.PUBLIC_URL + '/assets/Trash.svg'}
           width="80%"
           alt="Trash icon"
         />

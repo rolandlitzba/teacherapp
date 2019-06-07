@@ -25,16 +25,16 @@ const StyledDeleteButton = styled.button`
   background: none;
   border: none;
   font-size: 1.2em;
-  margin: 10px 0;
   justify-self: right;
+  margin: 10px 0;
   width: 20%;
 `;
 
 const StyledInput = styled.input`
   color: #818988;
-  font-size: 1em;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 1em;
 `;
 
 const StyledButtonWrapper = styled.div`
@@ -52,12 +52,12 @@ const StyledButton = styled.button`
   width: 20%;
 `;
 
-export default function SelectedStudent({
+export default function StudentSelection({
   cards,
   match,
-  onDelete,
+  handleDelete,
   history,
-  onUpdate
+  handleUpdate
 }) {
   const selectedStudent = cards.students.find(
     student => student.id === match.params.studentId
@@ -70,14 +70,14 @@ export default function SelectedStudent({
   }
 
   function onDeleteClick() {
-    onDelete(id, cards);
+    handleDelete(id, cards);
     history.push('/classes');
   }
 
   function onFormSubmit(event) {
     event.preventDefault();
     const form = event.target;
-    onUpdate({
+    handleUpdate({
       name: form.name.value,
       absence: form.absence.value,
       comments: form.comments.value,
@@ -90,7 +90,7 @@ export default function SelectedStudent({
     <StyledCardDetails onSubmit={onFormSubmit}>
       <StyledDeleteButton onClick={onDeleteClick}>
         <img
-          src={process.env.PUBLIC_URL + '/Trash.svg'}
+          src={process.env.PUBLIC_URL + '/assets/Trash.svg'}
           width="80%"
           alt="Trash icon"
         />
@@ -123,12 +123,15 @@ export default function SelectedStudent({
       <StyledButtonWrapper>
         <StyledButton>
           <img
-            src={process.env.PUBLIC_URL + '/Confirm.svg'}
+            src={process.env.PUBLIC_URL + '/assets/Confirm.svg'}
             alt="Confirm icon"
           />
         </StyledButton>
         <StyledButton onClick={cancelChange}>
-          <img src={process.env.PUBLIC_URL + '/Cancel.svg'} alt="Cancel icon" />
+          <img
+            src={process.env.PUBLIC_URL + '/assets/Cancel.svg'}
+            alt="Cancel icon"
+          />
         </StyledButton>
       </StyledButtonWrapper>
     </StyledCardDetails>
@@ -136,7 +139,7 @@ export default function SelectedStudent({
     <StyledCardDetails>
       <StyledDeleteButton onClick={onDeleteClick}>
         <img
-          src={process.env.PUBLIC_URL + '/Trash.svg'}
+          src={process.env.PUBLIC_URL + '/assets/Trash.svg'}
           width="80%"
           alt="Trash icon"
         />
@@ -159,7 +162,7 @@ export default function SelectedStudent({
       </StyledLabel>
       <StyledButton onClick={() => setIsEditable(!isEditable)}>
         <img
-          src={process.env.PUBLIC_URL + '/Edit.svg'}
+          src={process.env.PUBLIC_URL + '/assets/Edit.svg'}
           width="80%"
           alt="Edit icon"
         />

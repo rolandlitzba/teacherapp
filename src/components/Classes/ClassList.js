@@ -7,7 +7,7 @@ const StyledCardList = styled.section`
   padding: 20px;
 `;
 
-export default function ClassesList({ classes }) {
+export default function ClassList({ classes }) {
   return (
     <StyledCardList>
       {classes.map(classItem => {

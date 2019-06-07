@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
 }
 
 body {
+  background: #fcffff;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;margin: 0;
   padding: 0;
   }

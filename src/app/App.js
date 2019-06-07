@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import GlobalStyles from '../misc/GlobalStyles';
+import GlobalStyles from '../components/Common/GlobalStyles';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Header from '../Header';
-import Footer from '../Footer';
-import Home from '../Home';
-import AllStudentsList from '../card/AllStudentsList';
-import ClassesList from '../card/ClassesList';
-import ModalForm from '../Form/ModalForm';
-import useModalForm from '../Form/useModalForm';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
+import Home from '../components/Home/Home';
 import { getLocal, setLocal } from '../services';
-import SelectedClass from '../card/SelectedClass';
-import SelectedStudent from '../card/SelectedStudent';
-import SubmitNewStudent from '../Form/SubmitNewStudent';
+import ClassList from '../components/Classes/ClassList';
+import ClassSelection from '../components/Classes/ClassSelection';
+import AllClasses from '../components/StudentOverview/AllStudents';
+import StudentSelection from '../components/StudentOverview/StudentSelection';
+import SubmitNewStudent from '../components/Form/SubmitNewStudent';
+import SubmitNewClass from '../components/Form/SubmitNewClass';
+import useSubmitNewClass from '../components/Form/useSubmitNewClass';
 
 const mockdata = require('../mockdata.json');
 
@@ -38,12 +38,12 @@ const StyledAddButton = styled.button`
 
 export default function App() {
   const [classes, setClasses] = useState(getLocal('classes') || mockdata);
-  const { Showing, toggle } = useModalForm();
+  const { Showing, toggle } = useSubmitNewClass();
   useEffect(() => {
     setLocal('classes', classes);
   }, [classes]);
 
-  function createClass(data) {
+  function handleNewClass(data) {
     const newClass = [
       ...classes,
       {
@@ -55,7 +55,7 @@ export default function App() {
     setClasses(newClass);
   }
 
-  function createStudent(data, id) {
+  function handleNewStudent(data, id) {
     const classIndex = classes.findIndex(card => card.id === id);
     const { students } = classes[classIndex];
     const updatedClass = {
@@ -141,7 +141,7 @@ export default function App() {
           <Route
             exact
             path="/classes"
-            render={() => <ClassesList classes={classes} />}
+            render={() => <ClassList classes={classes} />}
           />
           <Route
             exact
@@ -150,12 +150,12 @@ export default function App() {
               <>
                 <StyledAddButton className="button-default" onClick={toggle}>
                   <img
-                    src={process.env.PUBLIC_URL + '/Add.svg'}
+                    src={process.env.PUBLIC_URL + '/assets/Add.svg'}
                     alt="Add icon"
                   />
                 </StyledAddButton>
-                <ModalForm
-                  handleSubmitForm={data => createClass(data)}
+                <SubmitNewClass
+                  handleNewClass={data => handleNewClass(data)}
                   history={props.history}
                   Showing={Showing}
                   hide={toggle}
@@ -167,9 +167,9 @@ export default function App() {
             exact
             path="/classes/:id"
             render={props => (
-              <SelectedClass
+              <ClassSelection
                 card={findClassById(props.match.params.id)}
-                onDelete={handleClassDelete}
+                handleDelete={handleClassDelete}
                 {...props}
               />
             )}
@@ -181,13 +181,16 @@ export default function App() {
               <>
                 <StyledAddButton className="button-default" onClick={toggle}>
                   <img
-                    src={process.env.PUBLIC_URL + '/Add.svg'}
+                    src={process.env.PUBLIC_URL + '/assets/Add.svg'}
                     alt="Add icon"
                   />
                 </StyledAddButton>
                 <SubmitNewStudent
                   handleNewStudentSubmit={data =>
-                    createStudent(data, findClassById(props.match.params.id).id)
+                    handleNewStudent(
+                      data,
+                      findClassById(props.match.params.id).id
+                    )
                   }
                   cards={findClassById(props.match.params.id)}
                   Showing={Showing}
@@ -200,11 +203,11 @@ export default function App() {
             exact
             path="/classes/:classId/student/:studentId"
             render={props => (
-              <SelectedStudent
+              <StudentSelection
                 cards={findClassById(props.match.params.classId)}
-                onDelete={(id, data) => handleStudentDelete(id, data)}
+                handleDelete={(id, data) => handleStudentDelete(id, data)}
                 {...props}
-                onUpdate={data =>
+                handleUpdate={data =>
                   handleStudentUpdate(
                     data,
                     findClassById(props.match.params.classId).id
@@ -216,7 +219,7 @@ export default function App() {
           <Route
             exact
             path="/students"
-            render={() => <AllStudentsList classes={classes} />}
+            render={() => <AllClasses classes={classes} />}
           />
         </Main>
         <Footer />

@@ -6,7 +6,7 @@ const StyledCardList = styled.section`
   padding: 20px;
 `;
 
-export default function AllStudentsList({ classes }) {
+export default function AllStudents({ classes }) {
   return (
     <StyledCardList>
       {classes.map(classItem => {
