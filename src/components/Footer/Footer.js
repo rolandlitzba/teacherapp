@@ -4,8 +4,8 @@ import { NavLink, withRouter } from 'react-router-dom';
 
 const StyledFooter = styled.footer`
   border-top: solid #e5e8ef;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  display: flex;
+  justify-content: space-evenly;
   padding: 10px 40px;
 `;
 
@@ -15,7 +15,7 @@ const GoBack = ({ history }) => (
   <StyledBackButton onClick={() => history.goBack()} alt="Go back">
     <img
       src={process.env.PUBLIC_URL + '/assets/Back.svg'}
-      width="5%"
+      width="40%"
       alt="Back icon"
     />
   </StyledBackButton>
@@ -29,7 +29,7 @@ export default function Footer() {
       <StyledBackButton exact to="/">
         <img
           src={process.env.PUBLIC_URL + '/assets/Home.svg'}
-          width="5%"
+          width="40%"
           alt="Home icon"
         />
       </StyledBackButton>

@@ -4,7 +4,9 @@ import ClassCard from './ClassCard';
 
 const StyledCardList = styled.section`
   background: #fcffff;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 30px;
 `;
 
 export default function ClassList({ classes }) {
