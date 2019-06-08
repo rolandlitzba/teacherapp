@@ -33,11 +33,11 @@ const StyledDeleteButton = styled.button`
   width: 20%;
 `;
 
-export default function ClassSelection({ card, handleDelete, history }) {
-  const { classname, students, id } = card;
+export default function ClassSelection({ classes, onClassDelete, history }) {
+  const { classname, students, id } = classes;
 
   function onDeleteClick() {
-    handleDelete(id);
+    onClassDelete(id);
     history.push('/classes');
   }
 

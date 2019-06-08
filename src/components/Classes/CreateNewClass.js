@@ -56,7 +56,7 @@ const StyledButton = styled.button`
 
 export default function CreateNewClass({
   history,
-  handleNewClass,
+  onClassCreate,
   Showing,
   hide
 }) {
@@ -64,7 +64,7 @@ export default function CreateNewClass({
 
   function onFormSubmit(event) {
     event.preventDefault();
-    handleNewClass({
+    onClassCreate({
       classname: newClass,
       id: uid()
     });

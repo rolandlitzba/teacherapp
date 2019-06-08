@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import GlobalStyles from '../components/Common/GlobalStyles';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
-import Home from '../components/Home/Home';
+import Header from '../components/Layout/Header';
+import Footer from '../components/Layout/Footer';
+import Home from '../components/Layout/Home';
 import { getLocal, setLocal } from '../services';
 import ClassList from '../components/Classes/ClassList';
 import ClassSelection from '../components/Classes/ClassSelection';
@@ -43,7 +43,7 @@ export default function App() {
     setLocal('classes', classes);
   }, [classes]);
 
-  function createNewClass(data) {
+  function handleCreateNewClass(data) {
     const newClass = [
       ...classes,
       {
@@ -55,7 +55,7 @@ export default function App() {
     setClasses(newClass);
   }
 
-  function createNewStudent(data, id) {
+  function handleCreateNewStudent(data, id) {
     const classIndex = classes.findIndex(card => card.id === id);
     const { students } = classes[classIndex];
     const updatedClass = {
@@ -72,17 +72,17 @@ export default function App() {
     ]);
   }
 
-  function findClassById(id) {
+  function handleFindClassById(id) {
     const selectedClass = classes.find(card => card.id === id);
     return selectedClass;
   }
 
-  function deleteClassById(id) {
+  function handleDeleteClassById(id) {
     const index = classes.findIndex(card => card.id === id);
     setClasses([...classes.slice(0, index), ...classes.slice(index + 1)]);
   }
 
-  function updateStudentById(data, id) {
+  function handleUpdateByStudent(data, id) {
     const classIndex = classes.findIndex(card => card.id === id);
     const { students } = classes[classIndex];
     const studentIndex = classes[classIndex].students.findIndex(
@@ -109,7 +109,7 @@ export default function App() {
     ]);
   }
 
-  function deleteStudentById(id, data) {
+  function handleDeleteStudentById(id, data) {
     const classIndex = classes.findIndex(card => card.id === data.id);
     const studentIndex = classes[classIndex].students.findIndex(
       student => student.id === id
@@ -155,7 +155,7 @@ export default function App() {
                   />
                 </StyledAddButton>
                 <CreateNewClass
-                  handleNewClass={data => createNewClass(data)}
+                  onClassCreate={data => handleCreateNewClass(data)}
                   history={props.history}
                   Showing={Showing}
                   hide={toggle}
@@ -168,8 +168,8 @@ export default function App() {
             path="/classes/:id"
             render={props => (
               <ClassSelection
-                card={findClassById(props.match.params.id)}
-                handleDelete={deleteClassById}
+                classes={handleFindClassById(props.match.params.id)}
+                onClassDelete={handleDeleteClassById}
                 {...props}
               />
             )}
@@ -187,12 +187,12 @@ export default function App() {
                 </StyledAddButton>
                 <CreateNewStudent
                   onNewStudentSubmit={data =>
-                    createNewStudent(
+                    handleCreateNewStudent(
                       data,
-                      findClassById(props.match.params.id).id
+                      handleFindClassById(props.match.params.id).id
                     )
                   }
-                  classes={findClassById(props.match.params.id)}
+                  classes={handleFindClassById(props.match.params.id)}
                   Showing={Showing}
                   hide={toggle}
                 />
@@ -204,13 +204,15 @@ export default function App() {
             path="/classes/:classId/student/:studentId"
             render={props => (
               <SelectedStudent
-                classes={findClassById(props.match.params.classId)}
-                onDelete={(id, data) => deleteStudentById(id, data)}
+                classes={handleFindClassById(props.match.params.classId)}
+                onStudentDelete={(id, data) =>
+                  handleDeleteStudentById(id, data)
+                }
                 {...props}
-                onUpdate={data =>
-                  updateStudentById(
+                onStudentUpdate={data =>
+                  handleUpdateByStudent(
                     data,
-                    findClassById(props.match.params.classId).id
+                    handleFindClassById(props.match.params.classId).id
                   )
                 }
               />

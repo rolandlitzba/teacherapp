@@ -56,9 +56,9 @@ const StyledButton = styled.button`
 export default function SelectedStudent({
   classes,
   match,
-  onDelete,
+  onStudentDelete,
   history,
-  onUpdate
+  onStudentUpdate
 }) {
   const selectedStudent = classes.students.find(
     student => student.id === match.params.studentId
@@ -71,14 +71,14 @@ export default function SelectedStudent({
   }
 
   function onDeleteClick() {
-    onDelete(id, classes);
+    onStudentDelete(id, classes);
     history.push('/classes');
   }
 
   function onFormSubmit(event) {
     event.preventDefault();
     const form = event.target;
-    onUpdate({
+    onStudentUpdate({
       name: form.name.value,
       absence: form.absence.value,
       comments: form.comments.value,
