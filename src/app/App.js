@@ -9,7 +9,7 @@ import { getLocal, setLocal } from '../services';
 import ClassList from '../components/Classes/ClassList';
 import ClassSelection from '../components/Classes/ClassSelection';
 import AllClasses from '../components/Students/AllStudents';
-import SelectedStudent from '../components/Students/SelectedStudent';
+import Student from '../components/Students/Student';
 import CreateNewStudent from '../components/Students/CreateNewStudent';
 import CreateNewClass from '../components/Classes/CreateNewClass';
 import useCreateNewClass from '../components/Classes/useCreateNewClass';
@@ -203,7 +203,7 @@ export default function App() {
             exact
             path="/classes/:classId/student/:studentId"
             render={props => (
-              <SelectedStudent
+              <Student
                 classes={handleFindClassById(props.match.params.classId)}
                 onStudentDelete={(id, data) =>
                   handleDeleteStudentById(id, data)

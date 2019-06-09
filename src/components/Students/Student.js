@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import InputGroup from '../Common/InputGroup';
+import StudentInputGroup from './StudentInputGroup';
+import StudentInfoGroup from './StudentInfoGroup';
 
 const StyledCardDetails = styled.form`
   background: #fcffff;
@@ -31,13 +32,6 @@ const StyledDeleteButton = styled.button`
   width: 20%;
 `;
 
-const StyledInput = styled.input`
-  color: #818988;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 1em;
-`;
-
 const StyledButtonWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -53,11 +47,11 @@ const StyledButton = styled.button`
   width: 20%;
 `;
 
-export default function SelectedStudent({
+export default function Student({
   classes,
+  history,
   match,
   onStudentDelete,
-  history,
   onStudentUpdate
 }) {
   const selectedStudent = classes.students.find(
@@ -65,7 +59,9 @@ export default function SelectedStudent({
   );
   const { name, absence, comments, id } = selectedStudent;
   const [isEditable, setIsEditable] = useState(false);
-
+  const [newName, setNewName] = useState(name);
+  const [newAbsence, setNewAbsence] = useState(absence);
+  const [newComments, setNewComments] = useState(comments);
   function cancelChange() {
     setIsEditable(!isEditable);
   }
@@ -77,11 +73,10 @@ export default function SelectedStudent({
 
   function onFormSubmit(event) {
     event.preventDefault();
-    const form = event.target;
     onStudentUpdate({
-      name: form.name.value,
-      absence: form.absence.value,
-      comments: form.comments.value,
+      name: newName,
+      absence: newAbsence,
+      comments: newComments,
       id
     });
     setIsEditable(!isEditable);
@@ -96,25 +91,25 @@ export default function SelectedStudent({
           alt="Trash icon"
         />
       </StyledDeleteButton>
-      <InputGroup placeholder="huhu" value={name} />
-      {/* <StyledLabel>
-        Name:
-        <StyledStudentInformation>
-          <StyledInput name="name" defaultValue={name} />
-        </StyledStudentInformation>
-      </StyledLabel> */}
-      <StyledLabel>
-        Absence:
-        <StyledStudentInformation>
-          <StyledInput name="absence" type="number" defaultValue={absence} />
-        </StyledStudentInformation>
-      </StyledLabel>
-      <StyledLabel>
-        Comments:
-        <StyledStudentInformation>
-          <StyledInput name="comments" defaultValue={comments} />
-        </StyledStudentInformation>
-      </StyledLabel>
+      <StudentInputGroup
+        label="Name:"
+        name="name"
+        onChange={event => setNewName(event.target.value)}
+        value={newName}
+      />
+      <StudentInputGroup
+        label="Absence:"
+        name="absence"
+        type="number"
+        onChange={event => setNewAbsence(event.target.value)}
+        value={newAbsence}
+      />
+      <StudentInputGroup
+        label="Comments:"
+        name="comments"
+        onChange={event => setNewComments(event.target.value)}
+        value={newComments}
+      />
       <StyledButtonWrapper>
         <StyledButton>
           <img
