@@ -14,10 +14,10 @@ const StyledNavComponentes = styled(Link)`
   border: solid 1px #e5e8ef;
   border-radius: 12px;
   box-shadow: 3px 3px 5px 4px #e5e8ef;
-  color: black;
-  display: flex;
+  color: #7ababb;
+  display: grid;
   font-size: 1.2em;
-  justify-content: center;
+  justify-items: center;
   margin: 15px;
   min-height: 150px;
   min-width: 150px;
@@ -29,9 +29,19 @@ export default function Home() {
   return (
     <Wrapper>
       <StyledNavComponentes to={`/classes`}>
+        <img
+          src={process.env.PUBLIC_URL + '/assets/class.svg'}
+          width="50%"
+          alt="Class icon"
+        />
         <div>Classes</div>
       </StyledNavComponentes>
       <StyledNavComponentes to={`/students`}>
+        <img
+          src={process.env.PUBLIC_URL + '/assets/student.svg'}
+          width="50%"
+          alt="Student icon"
+        />
         <div>Students</div>
       </StyledNavComponentes>
     </Wrapper>

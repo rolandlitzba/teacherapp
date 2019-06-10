@@ -4,19 +4,19 @@
     "id": "a",
     "students": [
       {
-        "name": "Jyn Erso",
+        "name": "John Bender",
         "id": "1",
         "absence": "0",
         "comments": "no comments"
       },
       {
-        "name": "Chirrut Imwe",
+        "name": "Claire Standish",
         "id": "2",
         "absence": "1",
         "comments": "many comments"
       },
       {
-        "name": "Baze Malbus",
+        "name": "Allison Reynolds",
         "id": "3",
         "absence": "1",
         "comments": "many comments"
@@ -28,14 +28,44 @@
     "id": "b",
     "students": [
       {
-        "name": "Max Mustermann",
+        "name": "Andrew Clark",
         "id": "3",
         "absence": "0",
         "comments": "some comments"
       },
       {
-        "name": "Maxi Musterfrau",
+        "name": "Richard Vernon",
         "id": "4",
+        "absence": "1",
+        "comments": "one comment"
+      },
+      {
+        "name": "Carl Allen",
+        "id": "5",
+        "absence": "1",
+        "comments": "one comment"
+      }
+    ]
+  },
+  {
+    "classname": "9d",
+    "id": "c",
+    "students": [
+      {
+        "name": "Jud Nelson",
+        "id": "6",
+        "absence": "0",
+        "comments": "some comments"
+      },
+      {
+        "name": "Molly Ringwald",
+        "id": "7",
+        "absence": "1",
+        "comments": "one comment"
+      },
+      {
+        "name": "Ally Sheedy",
+        "id": "8",
         "absence": "1",
         "comments": "one comment"
       }

@@ -7,7 +7,7 @@ import Footer from '../components/Layout/Footer';
 import Home from '../components/Layout/Home';
 import { getLocal, setLocal } from '../services';
 import ClassList from '../components/Classes/ClassList';
-import ClassSelection from '../components/Classes/ClassSelection';
+import Class from '../components/Classes/Class';
 import AllClasses from '../components/Students/AllStudents';
 import Student from '../components/Students/Student';
 import CreateNewStudent from '../components/Students/CreateNewStudent';
@@ -167,7 +167,7 @@ export default function App() {
             exact
             path="/classes/:id"
             render={props => (
-              <ClassSelection
+              <Class
                 classes={handleFindClassById(props.match.params.id)}
                 onClassDelete={handleDeleteClassById}
                 {...props}

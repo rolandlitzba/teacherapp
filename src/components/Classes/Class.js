@@ -2,6 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+const StyledHeader = styled.h2`
+  color: #7ababb;
+  font-size: 1.7em;
+  font-weight: bold;
+`;
+
 const StyledCardList = styled.section`
   background: #fcffff;
   border: solid 1px #e5e8ef;
@@ -33,7 +39,7 @@ const StyledDeleteButton = styled.button`
   width: 20%;
 `;
 
-export default function ClassSelection({ classes, onClassDelete, history }) {
+export default function Class({ classes, onClassDelete, history }) {
   const { classname, students, id } = classes;
 
   function onDeleteClick() {
@@ -50,7 +56,7 @@ export default function ClassSelection({ classes, onClassDelete, history }) {
           alt="Trash icon"
         />
       </StyledDeleteButton>
-      <h2>{classname}</h2>
+      <StyledHeader>{classname}</StyledHeader>
       {students.map(student => {
         return (
           <StyledItem

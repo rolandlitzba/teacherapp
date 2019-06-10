@@ -12,11 +12,11 @@ const StyledStudentInformation = styled.p`
   margin: 0 0 30px;
 `;
 
-function StudentInfoGroup({ label, value }) {
+function StudentInfoGroup({ label, name, value }) {
   return (
     <StyledLabel>
       {label ? label : null}
-      <StyledStudentInformation value={value} />
+      <StyledStudentInformation name={name}>{value}</StyledStudentInformation>
     </StyledLabel>
   );
 }

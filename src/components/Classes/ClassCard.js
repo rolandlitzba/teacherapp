@@ -19,7 +19,9 @@ const StyledCard = styled(Link)`
 `;
 
 const StyledInformation = styled.p`
-  color: black;
+  color: #7ababb;
+  font-size: 1.3em;
+  font-weight: bold;
   margin: 0;
   padding: 10px;
 `;

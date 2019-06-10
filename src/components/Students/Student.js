@@ -134,22 +134,9 @@ export default function Student({
           alt="Trash icon"
         />
       </StyledDeleteButton>
-      <StyledLabel>
-        Name:
-        <StyledStudentInformation name="name">{name}</StyledStudentInformation>
-      </StyledLabel>
-      <StyledLabel>
-        Absence:
-        <StyledStudentInformation name="absence">
-          {absence}
-        </StyledStudentInformation>
-      </StyledLabel>
-      <StyledLabel>
-        Comments:
-        <StyledStudentInformation name="comments">
-          {comments}
-        </StyledStudentInformation>
-      </StyledLabel>
+      <StudentInfoGroup label="Name:" name="name" value={name} />
+      <StudentInfoGroup label="Absence:" name="absence" value={absence} />
+      <StudentInfoGroup label="Comments:" name="comments" value={comments} />
       <StyledButton onClick={() => setIsEditable(!isEditable)}>
         <img
           src={process.env.PUBLIC_URL + '/assets/Edit.svg'}
@@ -160,20 +147,3 @@ export default function Student({
     </StyledCardDetails>
   );
 }
-
-/*
-
-const options = ["name", "comments", "absence"]
-
-{options.map(option => {return (<StyledInformation{"option"}/>)})}
-
-function StyledInformation(option){
-  return (<StyledLabel>
-  {option}:
-  <StyledStudentInformation name={option}>
-    {option}
-  </StyledStudentInformation>
-  </StyledLabel>)
-}
-
-*/
