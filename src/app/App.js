@@ -38,7 +38,7 @@ const StyledAddButton = styled.button`
 
 export default function App() {
   const [classes, setClasses] = useState(getLocal('classes') || mockdata);
-  const { Showing, toggle } = useCreateNewClass();
+  const { isShowing, toggle } = useCreateNewClass();
   useEffect(() => {
     setLocal('classes', classes);
   }, [classes]);
@@ -157,7 +157,7 @@ export default function App() {
                 <CreateNewClass
                   onClassCreate={data => handleCreateNewClass(data)}
                   history={props.history}
-                  Showing={Showing}
+                  Showing={isShowing}
                   hide={toggle}
                 />
               </>
@@ -193,7 +193,7 @@ export default function App() {
                     )
                   }
                   classes={handleFindClassById(props.match.params.id)}
-                  Showing={Showing}
+                  Showing={isShowing}
                   hide={toggle}
                 />
               </>

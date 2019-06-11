@@ -8,7 +8,7 @@ const Wrapper = styled.section`
   margin-top: 30px;
 `;
 
-const StyledNavComponentes = styled(Link)`
+const StyledNavComponents = styled(Link)`
   align-items: center;
   background: #fcffff;
   border: solid 1px #e5e8ef;
@@ -28,22 +28,22 @@ const StyledNavComponentes = styled(Link)`
 export default function Home() {
   return (
     <Wrapper>
-      <StyledNavComponentes to={`/classes`}>
+      <StyledNavComponents to={`/classes`}>
         <img
           src={process.env.PUBLIC_URL + '/assets/class.svg'}
           width="50%"
           alt="Class icon"
         />
         <div>Classes</div>
-      </StyledNavComponentes>
-      <StyledNavComponentes to={`/students`}>
+      </StyledNavComponents>
+      <StyledNavComponents to={`/students`}>
         <img
           src={process.env.PUBLIC_URL + '/assets/student.svg'}
           width="50%"
           alt="Student icon"
         />
         <div>Students</div>
-      </StyledNavComponentes>
+      </StyledNavComponents>
     </Wrapper>
   );
 }
