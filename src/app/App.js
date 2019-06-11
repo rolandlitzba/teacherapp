@@ -8,7 +8,7 @@ import Home from '../components/Layout/Home';
 import { getLocal, setLocal } from '../services';
 import ClassList from '../components/Classes/ClassList';
 import Class from '../components/Classes/Class';
-import AllClasses from '../components/Students/AllStudents';
+import AllStudents from '../components/Students/AllStudents';
 import Student from '../components/Students/Student';
 import CreateNewStudent from '../components/Students/CreateNewStudent';
 import CreateNewClass from '../components/Classes/CreateNewClass';
@@ -221,7 +221,7 @@ export default function App() {
           <Route
             exact
             path="/students"
-            render={() => <AllClasses classes={classes} />}
+            render={() => <AllStudents classes={classes} />}
           />
         </Main>
         <Footer />

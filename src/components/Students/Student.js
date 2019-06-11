@@ -12,17 +12,6 @@ const StyledCardDetails = styled.form`
   padding: 10px 20px;
 `;
 
-const StyledLabel = styled.label`
-  display: grid;
-  font-size: 1.2em;
-  margin: 30px 0 0;
-`;
-
-const StyledStudentInformation = styled.p`
-  color: #818988;
-  margin: 0 0 30px;
-`;
-
 const StyledDeleteButton = styled.button`
   background: none;
   border: none;
