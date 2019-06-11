@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../Header';
-import Footer from '../Footer';
 import styled from 'styled-components';
-import CardList from '../card/CardList';
-import GlobalStyles from '../misc/GlobalStyles';
-import DetailCard from '../card/DetailCard';
+import GlobalStyles from '../components/Common/GlobalStyles';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import ModalForm from '../Form/ModalForm';
-import useModalForm from '../Form/useModalForm';
+import Header from '../components/Layout/Header';
+import Footer from '../components/Layout/Footer';
+import Home from '../components/Layout/Home';
 import { getLocal, setLocal } from '../services';
+import ClassList from '../components/Classes/ClassList';
+import Class from '../components/Classes/Class';
+import AllStudents from '../components/Students/AllStudents';
+import Student from '../components/Students/Student';
+import CreateNewStudent from '../components/Students/CreateNewStudent';
+import CreateNewClass from '../components/Classes/CreateNewClass';
+import useCreateNewClass from '../components/Classes/useCreateNewClass';
 
 const mockdata = require('../mockdata.json');
 
@@ -33,39 +37,97 @@ const StyledAddButton = styled.button`
 `;
 
 export default function App() {
-  const [cards, setCards] = useState(getLocal('cards') || mockdata);
-  const { Showing, toggle } = useModalForm();
+  const [classes, setClasses] = useState(getLocal('classes') || mockdata);
+  const { isShowing, toggle } = useCreateNewClass();
   useEffect(() => {
-    setLocal('cards', cards);
-  }, [cards]);
+    setLocal('classes', classes);
+  }, [classes]);
 
-  function createCard(data) {
-    const newCards = [...cards, data];
-    setCards(newCards);
+  function handleCreateNewClass(data) {
+    const newClass = [
+      ...classes,
+      {
+        classname: data.classname,
+        id: data.id,
+        students: [{ name: '', id: '', absence: '', comments: '' }]
+      }
+    ];
+    setClasses(newClass);
   }
 
-  function findCard(id) {
-    const card = cards.find(card => card.id === id);
-    return card;
-  }
-
-  function handleDelete(id) {
-    const index = cards.findIndex(card => card.id === id);
-    setCards([...cards.slice(0, index), ...cards.slice(index + 1)]);
-  }
-
-  function handleUpdate(editedCard) {
-    const index = cards.findIndex(card => card.id === editedCard.id);
-    const updatedCard = {
-      ...cards[index],
-      name: editedCard.name,
-      absence: editedCard.absence,
-      comments: editedCard.comments
+  function handleCreateNewStudent(data, id) {
+    const classIndex = classes.findIndex(card => card.id === id);
+    const { students } = classes[classIndex];
+    const updatedClass = {
+      ...classes[classIndex],
+      students: [
+        ...students,
+        { name: data.name, id: data.id, absence: '', comments: '' }
+      ]
     };
-    setCards([
-      ...cards.slice(0, index),
-      updatedCard,
-      ...cards.slice(index + 1)
+    setClasses([
+      ...classes.slice(0, classIndex),
+      updatedClass,
+      ...classes.slice(classIndex + 1)
+    ]);
+  }
+
+  function handleFindClassById(id) {
+    const selectedClass = classes.find(card => card.id === id);
+    return selectedClass;
+  }
+
+  function handleDeleteClassById(id) {
+    const index = classes.findIndex(card => card.id === id);
+    setClasses([...classes.slice(0, index), ...classes.slice(index + 1)]);
+  }
+
+  function handleUpdateByStudent(data, id) {
+    const classIndex = classes.findIndex(card => card.id === id);
+    const { students } = classes[classIndex];
+    const studentIndex = classes[classIndex].students.findIndex(
+      student => student.id === data.id
+    );
+    const updatedStudent = {
+      name: data.name,
+      id: data.id,
+      absence: data.absence,
+      comments: data.comments
+    };
+    const updatedClass = {
+      ...classes[classIndex],
+      students: [
+        ...students.slice(0, studentIndex),
+        updatedStudent,
+        ...students.slice(studentIndex + 1)
+      ]
+    };
+    setClasses([
+      ...classes.slice(0, classIndex),
+      updatedClass,
+      ...classes.slice(classIndex + 1)
+    ]);
+  }
+
+  function handleDeleteStudentById(id, data) {
+    const classIndex = classes.findIndex(card => card.id === data.id);
+    const studentIndex = classes[classIndex].students.findIndex(
+      student => student.id === id
+    );
+    const { students } = classes[classIndex];
+    const updatedClass = {
+      ...classes[classIndex],
+      classname: data.classname,
+      id: data.id,
+      students: [
+        ...students.slice(0, studentIndex),
+        ...students.slice(studentIndex + 1)
+      ]
+    };
+    setClasses([
+      ...classes.slice(0, classIndex),
+      updatedClass,
+      ...classes.slice(classIndex + 1)
     ]);
   }
 
@@ -75,37 +137,91 @@ export default function App() {
         <GlobalStyles />
         <Header />
         <Main>
-          <Route exact path="/" render={() => <CardList cards={cards} />} />
+          <Route exact path="/" component={Home} />
           <Route
-            path="/details/:id"
+            exact
+            path="/classes"
+            render={() => <ClassList classes={classes} />}
+          />
+          <Route
+            exact
+            path="/classes"
             render={props => (
-              <DetailCard
-                card={findCard(props.match.params.id)}
-                onDelete={handleDelete}
+              <>
+                <StyledAddButton className="button-default" onClick={toggle}>
+                  <img
+                    src={process.env.PUBLIC_URL + '/assets/Add.svg'}
+                    alt="Add icon"
+                  />
+                </StyledAddButton>
+                <CreateNewClass
+                  onClassCreate={data => handleCreateNewClass(data)}
+                  history={props.history}
+                  Showing={isShowing}
+                  hide={toggle}
+                />
+              </>
+            )}
+          />
+          <Route
+            exact
+            path="/classes/:id"
+            render={props => (
+              <Class
+                classes={handleFindClassById(props.match.params.id)}
+                onClassDelete={handleDeleteClassById}
                 {...props}
-                onUpdate={handleUpdate}
               />
             )}
           />
           <Route
             exact
-            path="/"
+            path="/classes/:id"
             render={props => (
               <>
                 <StyledAddButton className="button-default" onClick={toggle}>
                   <img
-                    src={process.env.PUBLIC_URL + '/Add.svg'}
+                    src={process.env.PUBLIC_URL + '/assets/Add.svg'}
                     alt="Add icon"
                   />
                 </StyledAddButton>
-                <ModalForm
-                  handleSubmitForm={data => createCard(data)}
-                  history={props.history}
-                  Showing={Showing}
+                <CreateNewStudent
+                  onNewStudentSubmit={data =>
+                    handleCreateNewStudent(
+                      data,
+                      handleFindClassById(props.match.params.id).id
+                    )
+                  }
+                  classes={handleFindClassById(props.match.params.id)}
+                  Showing={isShowing}
                   hide={toggle}
                 />
               </>
             )}
+          />
+          <Route
+            exact
+            path="/classes/:classId/student/:studentId"
+            render={props => (
+              <Student
+                classes={handleFindClassById(props.match.params.classId)}
+                onStudentDelete={(id, data) =>
+                  handleDeleteStudentById(id, data)
+                }
+                {...props}
+                onStudentUpdate={data =>
+                  handleUpdateByStudent(
+                    data,
+                    handleFindClassById(props.match.params.classId).id
+                  )
+                }
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/students"
+            render={() => <AllStudents classes={classes} />}
           />
         </Main>
         <Footer />

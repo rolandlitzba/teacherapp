@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useModalForm = () => {
+const useCreateNewClass = () => {
   const [Showing, setShowing] = useState(false);
 
   function toggle() {
@@ -13,4 +13,4 @@ const useModalForm = () => {
   };
 };
 
-export default useModalForm;
+export default useCreateNewClass;

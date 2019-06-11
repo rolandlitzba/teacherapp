@@ -1,26 +1,74 @@
 [
   {
-    "name": "Jyn Erso",
-    "id": "1",
-    "absence": "0",
-    "comments": "no comments"
+    "classname": "5a",
+    "id": "a",
+    "students": [
+      {
+        "name": "John Bender",
+        "id": "1",
+        "absence": "0",
+        "comments": "no comments"
+      },
+      {
+        "name": "Claire Standish",
+        "id": "2",
+        "absence": "1",
+        "comments": "many comments"
+      },
+      {
+        "name": "Allison Reynolds",
+        "id": "3",
+        "absence": "1",
+        "comments": "many comments"
+      }
+    ]
   },
   {
-    "name": "Chirrut Imwe",
-    "id": "2",
-    "absence": "1",
-    "comments": "likes baby cittens"
+    "classname": "6b",
+    "id": "b",
+    "students": [
+      {
+        "name": "Andrew Clark",
+        "id": "3",
+        "absence": "0",
+        "comments": "some comments"
+      },
+      {
+        "name": "Richard Vernon",
+        "id": "4",
+        "absence": "1",
+        "comments": "one comment"
+      },
+      {
+        "name": "Carl Allen",
+        "id": "5",
+        "absence": "1",
+        "comments": "one comment"
+      }
+    ]
   },
   {
-    "name": "Baze Malbus",
-    "id": "3",
-    "absence": "0",
-    "comments": "do not contact parents"
-  },
-  {
-    "name": "Bodhi Rook",
-    "id": "4",
-    "absence": "20",
-    "comments": "no comments"
+    "classname": "9d",
+    "id": "c",
+    "students": [
+      {
+        "name": "Judd Nelson",
+        "id": "6",
+        "absence": "0",
+        "comments": "some comments"
+      },
+      {
+        "name": "Molly Ringwald",
+        "id": "7",
+        "absence": "1",
+        "comments": "one comment"
+      },
+      {
+        "name": "Ally Sheedy",
+        "id": "8",
+        "absence": "1",
+        "comments": "one comment"
+      }
+    ]
   }
 ]
