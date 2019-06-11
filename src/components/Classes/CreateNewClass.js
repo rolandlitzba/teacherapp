@@ -57,7 +57,7 @@ const StyledButton = styled.button`
 export default function CreateNewClass({
   history,
   onClassCreate,
-  Showing,
+  isShowing,
   hide
 }) {
   const [newClass, setNewClass] = useState('');
@@ -72,7 +72,7 @@ export default function CreateNewClass({
     hide();
   }
 
-  return Showing
+  return isShowing
     ? ReactDOM.createPortal(
         <StyledModal>
           <StyledWrapper>
