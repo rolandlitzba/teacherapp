@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
 const useCreateNewClass = () => {
-  const [Showing, setShowing] = useState(false);
+  const [isShowing, setIsShowing] = useState(false);
 
   function toggle() {
-    setShowing(!Showing);
+    setIsShowing(!isShowing);
   }
 
   return {
-    Showing,
+    isShowing,
     toggle
   };
 };

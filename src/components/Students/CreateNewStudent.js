@@ -57,7 +57,7 @@ const StyledButton = styled.button`
 export default function CreateNewStudent({
   history,
   onNewStudentSubmit,
-  Showing,
+  isShowing,
   hide
 }) {
   const [newStudent, setNewStudent] = useState('');
@@ -70,7 +70,7 @@ export default function CreateNewStudent({
     hide();
   }
 
-  return Showing
+  return isShowing
     ? ReactDOM.createPortal(
         <StyledModal>
           <StyledWrapper>
@@ -89,6 +89,7 @@ export default function CreateNewStudent({
                   placeholder="Insert new student here"
                 />
               </StyledLabel>
+
               <StyledButtonWrapper>
                 <StyledButton>
                   <img

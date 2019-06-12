@@ -49,7 +49,7 @@ export default function App() {
       {
         classname: data.classname,
         id: data.id,
-        students: [{ name: '', id: '', absence: '', comments: '' }]
+        students: [{ name: '', id: '', img: '', absence: '', comments: '' }]
       }
     ];
     setClasses(newClass);
@@ -62,7 +62,7 @@ export default function App() {
       ...classes[classIndex],
       students: [
         ...students,
-        { name: data.name, id: data.id, absence: '', comments: '' }
+        { name: data.name, id: data.id, img: '', absence: '', comments: '' }
       ]
     };
     setClasses([
@@ -91,6 +91,7 @@ export default function App() {
     const updatedStudent = {
       name: data.name,
       id: data.id,
+      img: data.img,
       absence: data.absence,
       comments: data.comments
     };
@@ -157,7 +158,7 @@ export default function App() {
                 <CreateNewClass
                   onClassCreate={data => handleCreateNewClass(data)}
                   history={props.history}
-                  Showing={isShowing}
+                  isShowing={isShowing}
                   hide={toggle}
                 />
               </>
@@ -193,7 +194,7 @@ export default function App() {
                     )
                   }
                   classes={handleFindClassById(props.match.params.id)}
-                  Showing={isShowing}
+                  isShowing={isShowing}
                   hide={toggle}
                 />
               </>

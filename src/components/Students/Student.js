@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import StudentInputGroup from './StudentInputGroup';
 import StudentInfoGroup from './StudentInfoGroup';
+import axios from 'axios';
+
+const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
+const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
 
 const StyledCardDetails = styled.form`
   background: #fcffff;
@@ -35,6 +39,10 @@ const StyledButton = styled.button`
   margin: 10px;
   width: 20%;
 `;
+const StyledImageWrapper = styled.div`
+  display: grid;
+  justify-content: left;
+`;
 
 export default function Student({
   classes,
@@ -46,11 +54,13 @@ export default function Student({
   const selectedStudent = classes.students.find(
     student => student.id === match.params.studentId
   );
-  const { name, absence, comments, id } = selectedStudent;
+  const [image, setImage] = useState('');
+  const { img, name, absence, comments, id } = selectedStudent;
   const [isEditable, setIsEditable] = useState(false);
   const [newName, setNewName] = useState(name);
   const [newAbsence, setNewAbsence] = useState(absence);
   const [newComments, setNewComments] = useState(comments);
+  const [isDeleted, setIsDeleted] = useState(false);
   function cancelChange() {
     setIsEditable(!isEditable);
   }
@@ -66,9 +76,34 @@ export default function Student({
       name: newName,
       absence: newAbsence,
       comments: newComments,
+      img: image,
       id
     });
     setIsEditable(!isEditable);
+    setIsDeleted(!isDeleted);
+  }
+
+  function upload(event) {
+    const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`;
+    const formData = new FormData();
+    formData.append('file', event.target.files[0]);
+    formData.append('upload_preset', PRESET);
+    axios
+      .post(url, formData, {
+        headers: {
+          'Content-type': 'multipart/form-data'
+        }
+      })
+      .then(onImageSave)
+      .catch(err => console.error(err));
+  }
+
+  function onImageSave(response) {
+    setImage(response.data.url);
+  }
+
+  function onDeleteImage() {
+    setIsDeleted(!isDeleted);
   }
 
   return isEditable ? (
@@ -80,6 +115,16 @@ export default function Student({
           alt="Trash icon"
         />
       </StyledDeleteButton>
+
+      {isDeleted ? (
+        <input type="file" name="file" onChange={upload} />
+      ) : (
+        <StyledImageWrapper>
+          <img src={img} alt="Profile" style={{ width: '100%' }} />
+          <button onClick={onDeleteImage}>Löschen</button>
+        </StyledImageWrapper>
+      )}
+
       <StudentInputGroup
         label="Name:"
         name="name"
@@ -123,7 +168,13 @@ export default function Student({
           alt="Trash icon"
         />
       </StyledDeleteButton>
-      <StudentInfoGroup label="Name:" name="name" value={name} />
+      <img src={img} alt="ProfileImage" />
+      <StudentInfoGroup
+        label="Name:"
+        name="name"
+        value={name}
+        alt="profile-picture"
+      />
       <StudentInfoGroup label="Absence:" name="absence" value={absence} />
       <StudentInfoGroup label="Comments:" name="comments" value={comments} />
       <StyledButton onClick={() => setIsEditable(!isEditable)}>
