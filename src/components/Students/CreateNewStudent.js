@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 import uid from 'uid';
-import axios from 'axios';
-
-const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
-const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
 
 const StyledModal = styled.div`
   background: #0000008c;
@@ -58,20 +54,12 @@ const StyledButton = styled.button`
   padding: 0;
 `;
 
-const StyledImage = styled.div`
-  display: flex;
-  margin: 10px;
-  flex-direction: column;
-  padding: 5px;
-`;
-
 export default function CreateNewStudent({
   history,
   onNewStudentSubmit,
   isShowing,
   hide
 }) {
-  const [image, setImage] = useState('');
   const [newStudent, setNewStudent] = useState('');
   function onFormSubmit(event) {
     event.preventDefault();
@@ -80,27 +68,6 @@ export default function CreateNewStudent({
       id: uid()
     });
     hide();
-  }
-
-  function upload(event) {
-    const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`;
-
-    const formData = new FormData();
-    formData.append('file', event.target.files[0]);
-    formData.append('upload_preset', PRESET);
-
-    axios
-      .post(url, formData, {
-        headers: {
-          'Content-type': 'multipart/form-data'
-        }
-      })
-      .then(onImageSave)
-      .catch(err => console.error(err));
-  }
-
-  function onImageSave(response) {
-    setImage(response.data.url);
   }
 
   return isShowing
@@ -122,13 +89,7 @@ export default function CreateNewStudent({
                   placeholder="Insert new student here"
                 />
               </StyledLabel>
-              <StyledImage>
-                {image ? (
-                  <img src={image} alt="" style={{ width: '100%' }} />
-                ) : (
-                  <input type="file" name="file" onChange={upload} />
-                )}
-              </StyledImage>
+
               <StyledButtonWrapper>
                 <StyledButton>
                   <img

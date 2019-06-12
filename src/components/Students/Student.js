@@ -39,6 +39,10 @@ const StyledButton = styled.button`
   margin: 10px;
   width: 20%;
 `;
+const StyledImageWrapper = styled.div`
+  display: grid;
+  justify-content: left;
+`;
 
 export default function Student({
   classes,
@@ -76,6 +80,7 @@ export default function Student({
       id
     });
     setIsEditable(!isEditable);
+    setIsDeleted(!isDeleted);
   }
 
   function upload(event) {
@@ -99,9 +104,6 @@ export default function Student({
 
   function onDeleteImage() {
     setIsDeleted(!isDeleted);
-    setImage(
-      'https://res.cloudinary.com/dvdsptlml/image/upload/v1560262356/edfr4fwsyiczzqxpvrib.png'
-    );
   }
 
   return isEditable ? (
@@ -117,10 +119,10 @@ export default function Student({
       {isDeleted ? (
         <input type="file" name="file" onChange={upload} />
       ) : (
-        <div>
+        <StyledImageWrapper>
           <img src={img} alt="Profile" style={{ width: '100%' }} />
           <button onClick={onDeleteImage}>Löschen</button>
-        </div>
+        </StyledImageWrapper>
       )}
 
       <StudentInputGroup
