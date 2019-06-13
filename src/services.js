@@ -1,9 +1,19 @@
-export function getCards() {
-  return fetch('/classes').then(res => res.json());
-}
-
 export function postClass(data) {
   return fetchCard('POST', data);
+}
+
+export function deleteClass(id) {
+  return fetch(`/class/${id}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      id
+    })
+  }).then(res => res.json());
+}
+
+export function getCards() {
+  return fetch('/class').then(res => res.json());
 }
 
 export function patchCard(data, id) {
@@ -11,9 +21,7 @@ export function patchCard(data, id) {
 }
 
 function fetchCard(method, data, id = '') {
-  console.log('Data', data);
-
-  return fetch('/class', {
+  return fetch('/class' + id, {
     method,
     headers: {
       'Content-Type': 'application/json'

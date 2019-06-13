@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import Home from '../components/Layout/Home';
-import { getLocal, setLocal, postClass } from '../services';
+import { getLocal, setLocal, postClass, deleteClass } from '../services';
 import ClassList from '../components/Classes/ClassList';
 import Class from '../components/Classes/Class';
 import AllStudents from '../components/Students/AllStudents';
@@ -54,6 +54,12 @@ export default function App() {
     postClass(newClass);
   }
 
+  function handleDeleteClassById(classId) {
+    const index = classes.findIndex(card => card.classId === classId);
+    setClasses([...classes.slice(0, index), ...classes.slice(index + 1)]);
+    deleteClass(classId);
+  }
+
   function handleCreateNewStudent(data, classId) {
     const classIndex = classes.findIndex(card => card.classId === classId);
     const { students } = classes[classIndex];
@@ -74,11 +80,6 @@ export default function App() {
   function handleFindClassById(classId) {
     const selectedClass = classes.find(card => card.classId === classId);
     return selectedClass;
-  }
-
-  function handleDeleteClassById(classId) {
-    const index = classes.findIndex(card => card.classId === classId);
-    setClasses([...classes.slice(0, index), ...classes.slice(index + 1)]);
   }
 
   function handleUpdateByStudent(data, classId) {

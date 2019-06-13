@@ -8,6 +8,13 @@ app.post('/class', (req, res) => {
     .catch(err => res.json(err));
 });
 
+app.delete('/class/:id', (req, res) => {
+  const { id } = req.params;
+  Classes.findOneAndRemove({ classId: id })
+    .then(classes => res.json(classes))
+    .catch(err => res.json(err));
+});
+
 app.get('/class', (req, res) => {
   Classes.find()
     .then(cardItem => res.json(cardItem))
@@ -18,12 +25,5 @@ app.patch('/class/:id', (req, res) => {
   const { id } = req.params;
   Classes.findByIdAndUpdate(id, req.body, { new: true })
     .then(card => res.json(card))
-    .catch(err => res.json(err));
-});
-
-app.delete('/class/:id', (req, res) => {
-  const { id } = req.params;
-  Classes.findOneAndRemove({ classId: id })
-    .then(classes => res.json(classes))
     .catch(err => res.json(err));
 });
