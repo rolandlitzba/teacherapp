@@ -44,12 +44,12 @@ export default function AllStudents({ classes }) {
     <StyledCardList>
       {classes.map(classItem => {
         return (
-          <StyledClassWrapper key={classItem.id}>
+          <StyledClassWrapper key={classItem.classId}>
             <StyledHeader>{classItem.classname}</StyledHeader>
             {classItem.students.map(student => (
               <StyledWrapper key={student.id}>
                 <StyledItem
-                  to={`/classes/${classItem.id}/student/${student.id}`}
+                  to={`/classes/${classItem.classId}/student/${student.id}`}
                 >
                   {student.name}
                 </StyledItem>

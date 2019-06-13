@@ -110,7 +110,7 @@ export default function App() {
     ]);
   }
 
-  function handleDeleteStudentById(classId, data) {
+  function handleDeleteStudentById(id, data) {
     const classIndex = classes.findIndex(card => card.classId === data.classId);
     const studentIndex = classes[classIndex].students.findIndex(
       student => student.id === id
@@ -119,7 +119,7 @@ export default function App() {
     const updatedClass = {
       ...classes[classIndex],
       classname: data.classname,
-      id: data.id,
+      classId: data.classId,
       students: [
         ...students.slice(0, studentIndex),
         ...students.slice(studentIndex + 1)
@@ -166,10 +166,10 @@ export default function App() {
           />
           <Route
             exact
-            path="/classes/:id"
+            path="/classes/:classId"
             render={props => (
               <Class
-                classes={handleFindClassById(props.match.params.id)}
+                classes={handleFindClassById(props.match.params.classId)}
                 onClassDelete={handleDeleteClassById}
                 {...props}
               />
@@ -177,7 +177,7 @@ export default function App() {
           />
           <Route
             exact
-            path="/classes/:id"
+            path="/classes/:classId"
             render={props => (
               <>
                 <StyledAddButton className="button-default" onClick={toggle}>
@@ -187,13 +187,13 @@ export default function App() {
                   />
                 </StyledAddButton>
                 <CreateNewStudent
+                  classes={handleFindClassById(props.match.params.classId)}
                   onNewStudentSubmit={data =>
                     handleCreateNewStudent(
                       data,
-                      handleFindClassById(props.match.params.id).id
+                      handleFindClassById(props.match.params.classId).classId
                     )
                   }
-                  classes={handleFindClassById(props.match.params.id)}
                   isShowing={isShowing}
                   hide={toggle}
                 />
@@ -213,7 +213,7 @@ export default function App() {
                 onStudentUpdate={data =>
                   handleUpdateByStudent(
                     data,
-                    handleFindClassById(props.match.params.classId).id
+                    handleFindClassById(props.match.params.classId).classId
                   )
                 }
               />

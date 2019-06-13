@@ -13,7 +13,7 @@ export default function ClassList({ classes }) {
   return (
     <StyledCardList>
       {classes.map(classItem => {
-        return <ClassCard key={classItem.id} classItem={classItem} />;
+        return <ClassCard key={classItem.classId} classItem={classItem} />;
       })}
     </StyledCardList>
   );

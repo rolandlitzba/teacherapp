@@ -66,7 +66,7 @@ export default function CreateNewClass({
     event.preventDefault();
     onClassCreate({
       classname: newClass,
-      id: uid()
+      classId: uid()
     });
     history.replace('/classes');
     hide();

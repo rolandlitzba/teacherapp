@@ -27,9 +27,9 @@ const StyledInformation = styled.p`
 `;
 
 export default function Card({ classItem }) {
-  const { classname, id } = classItem;
+  const { classname, classId } = classItem;
   return (
-    <StyledCard to={`/classes/${id}`}>
+    <StyledCard to={`/classes/${classId}`}>
       <StyledInformation>{classname}</StyledInformation>
     </StyledCard>
   );

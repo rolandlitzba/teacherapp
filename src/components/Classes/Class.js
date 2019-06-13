@@ -40,10 +40,10 @@ const StyledDeleteButton = styled.button`
 `;
 
 export default function Class({ classes, onClassDelete, history }) {
-  const { classname, students, id } = classes;
+  const { classname, students, classId } = classes;
 
   function onDeleteClick() {
-    onClassDelete(id);
+    onClassDelete(classId);
     history.push('/classes');
   }
 
@@ -61,7 +61,7 @@ export default function Class({ classes, onClassDelete, history }) {
         return (
           <StyledItem
             key={student.id}
-            to={`/classes/${id}/student/${student.id}`}
+            to={`/classes/${classId}/student/${student.id}`}
           >
             {student.name}
           </StyledItem>
