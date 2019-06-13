@@ -54,13 +54,14 @@ export default function Student({
   const selectedStudent = classes.students.find(
     student => student.id === match.params.studentId
   );
-  const [image, setImage] = useState('');
   const { img, name, absence, comments, id } = selectedStudent;
+  const [image, setImage] = useState(img);
   const [isEditable, setIsEditable] = useState(false);
   const [newName, setNewName] = useState(name);
   const [newAbsence, setNewAbsence] = useState(absence);
   const [newComments, setNewComments] = useState(comments);
   const [isDeleted, setIsDeleted] = useState(false);
+
   function cancelChange() {
     setIsEditable(!isEditable);
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 const StyledFooter = styled.footer`
   border-top: solid #e5e8ef;
@@ -9,7 +9,7 @@ const StyledFooter = styled.footer`
   padding: 10px 40px;
 `;
 
-const StyledBackButton = styled(NavLink)``;
+const StyledBackButton = styled.div``;
 
 const GoBack = ({ history }) => (
   <StyledBackButton onClick={() => history.goBack()} alt="Go back">
@@ -22,19 +22,21 @@ const GoBack = ({ history }) => (
   </StyledBackButton>
 );
 
+const StyledHomeButton = styled(Link)``;
+
 export default function Footer() {
   const ShowLastPage = withRouter(GoBack);
   return (
     <StyledFooter>
       <ShowLastPage />
-      <StyledBackButton exact to="/" justify-self="center">
+      <StyledHomeButton to="/" justify-self="center">
         <img
           src={process.env.PUBLIC_URL + '/assets/Home.svg'}
           width="30px"
           height="30px"
           alt="Home icon"
         />
-      </StyledBackButton>
+      </StyledHomeButton>
     </StyledFooter>
   );
 }
