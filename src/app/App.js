@@ -5,7 +5,13 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import Home from '../components/Layout/Home';
-import { getLocal, setLocal, postClass, deleteClass } from '../services';
+import {
+  getLocal,
+  setLocal,
+  postClass,
+  deleteClass,
+  updateStudent
+} from '../services';
 import ClassList from '../components/Classes/ClassList';
 import Class from '../components/Classes/Class';
 import AllStudents from '../components/Students/AllStudents';
@@ -75,11 +81,7 @@ export default function App() {
       updatedClass,
       ...classes.slice(classIndex + 1)
     ]);
-  }
-
-  function handleFindClassById(classId) {
-    const selectedClass = classes.find(card => card.classId === classId);
-    return selectedClass;
+    updateStudent(updatedClass);
   }
 
   function handleUpdateByStudent(data, classId) {
@@ -108,6 +110,7 @@ export default function App() {
       updatedClass,
       ...classes.slice(classIndex + 1)
     ]);
+    updateStudent(updatedClass);
   }
 
   function handleDeleteStudentById(id, data) {
@@ -130,6 +133,12 @@ export default function App() {
       updatedClass,
       ...classes.slice(classIndex + 1)
     ]);
+    updateStudent(updatedClass);
+  }
+
+  function handleFindClassById(classId) {
+    const selectedClass = classes.find(card => card.classId === classId);
+    return selectedClass;
   }
 
   return (

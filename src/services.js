@@ -12,12 +12,17 @@ export function deleteClass(id) {
   }).then(res => res.json());
 }
 
-export function getCards() {
-  return fetch('/class').then(res => res.json());
-}
-
-export function patchCard(data, id) {
-  return fetchCard('PATCH', data, id);
+export function updateStudent(classes) {
+  const { classname, classId, students } = classes;
+  return fetch(`/class/${classId}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      classname,
+      classId,
+      students
+    })
+  }).then(res => res.json());
 }
 
 function fetchCard(method, data, id = '') {
@@ -41,3 +46,7 @@ export function getLocal(data) {
     console.log(error);
   }
 }
+
+// export function getCards() {
+//   return fetch('/class').then(res => res.json());
+// }
