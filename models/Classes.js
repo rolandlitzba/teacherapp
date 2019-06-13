@@ -5,10 +5,14 @@ const classesSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  classId: {
+    type: String,
+    required: true
+  },
   students: [
     {
       name: String,
-      id: { String, unique: true },
+      id: String,
       img: String,
       absence: Number,
       comments: String

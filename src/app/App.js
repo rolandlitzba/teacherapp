@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import Home from '../components/Layout/Home';
-import { getLocal, setLocal } from '../services';
+import { getLocal, setLocal, postClass } from '../services';
 import ClassList from '../components/Classes/ClassList';
 import Class from '../components/Classes/Class';
 import AllStudents from '../components/Students/AllStudents';
@@ -44,15 +44,14 @@ export default function App() {
   }, [classes]);
 
   function handleCreateNewClass(data) {
-    const newClass = [
-      ...classes,
-      {
-        classname: data.classname,
-        id: data.id,
-        students: [{ name: '', id: '', img: '', absence: '', comments: '' }]
-      }
-    ];
-    setClasses(newClass);
+    const newClass = {
+      classname: data.classname,
+      classId: data.classId,
+      students: [{ name: '', id: '', img: '', absence: '', comments: '' }]
+    };
+
+    setClasses(prevState => [...prevState, newClass]);
+    postClass(newClass);
   }
 
   function handleCreateNewStudent(data, classId) {

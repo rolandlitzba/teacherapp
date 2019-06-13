@@ -2,7 +2,7 @@ export function getCards() {
   return fetch('/classes').then(res => res.json());
 }
 
-export function postCard(data) {
+export function postClass(data) {
   return fetchCard('POST', data);
 }
 
@@ -11,7 +11,9 @@ export function patchCard(data, id) {
 }
 
 function fetchCard(method, data, id = '') {
-  return fetch('/classes/' + id, {
+  console.log('Data', data);
+
+  return fetch('/class', {
     method,
     headers: {
       'Content-Type': 'application/json'
