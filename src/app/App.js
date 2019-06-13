@@ -55,8 +55,8 @@ export default function App() {
     setClasses(newClass);
   }
 
-  function handleCreateNewStudent(data, id) {
-    const classIndex = classes.findIndex(card => card.id === id);
+  function handleCreateNewStudent(data, classId) {
+    const classIndex = classes.findIndex(card => card.classId === classId);
     const { students } = classes[classIndex];
     const updatedClass = {
       ...classes[classIndex],
@@ -72,18 +72,18 @@ export default function App() {
     ]);
   }
 
-  function handleFindClassById(id) {
-    const selectedClass = classes.find(card => card.id === id);
+  function handleFindClassById(classId) {
+    const selectedClass = classes.find(card => card.classId === classId);
     return selectedClass;
   }
 
-  function handleDeleteClassById(id) {
-    const index = classes.findIndex(card => card.id === id);
+  function handleDeleteClassById(classId) {
+    const index = classes.findIndex(card => card.classId === classId);
     setClasses([...classes.slice(0, index), ...classes.slice(index + 1)]);
   }
 
-  function handleUpdateByStudent(data, id) {
-    const classIndex = classes.findIndex(card => card.id === id);
+  function handleUpdateByStudent(data, classId) {
+    const classIndex = classes.findIndex(card => card.classId === classId);
     const { students } = classes[classIndex];
     const studentIndex = classes[classIndex].students.findIndex(
       student => student.id === data.id
@@ -110,8 +110,8 @@ export default function App() {
     ]);
   }
 
-  function handleDeleteStudentById(id, data) {
-    const classIndex = classes.findIndex(card => card.id === data.id);
+  function handleDeleteStudentById(classId, data) {
+    const classIndex = classes.findIndex(card => card.classId === data.classId);
     const studentIndex = classes[classIndex].students.findIndex(
       student => student.id === id
     );

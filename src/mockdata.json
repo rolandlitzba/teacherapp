@@ -1,7 +1,7 @@
 [
   {
     "classname": "5a",
-    "id": "a",
+    "classId": "a",
     "students": [
       {
         "name": "John Bender",
@@ -28,7 +28,7 @@
   },
   {
     "classname": "6b",
-    "id": "b",
+    "classId": "b",
     "students": [
       {
         "name": "Andrew Clark",
@@ -55,7 +55,7 @@
   },
   {
     "classname": "9d",
-    "id": "c",
+    "classId": "c",
     "students": [
       {
         "name": "Judd Nelson",

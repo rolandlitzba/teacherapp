@@ -1,6 +1,5 @@
 const setupServer = require('./server-setup');
 const app = setupServer();
-
 const Classes = require('./models/Classes');
 
 app.post('/classes', (req, res) => {
@@ -11,7 +10,7 @@ app.post('/classes', (req, res) => {
 
 app.get('/classes', (req, res) => {
   Classes.find()
-    .then(classes => res.json(classes))
+    .then(cardItem => res.json(cardItem))
     .catch(err => res.json(err));
 });
 
