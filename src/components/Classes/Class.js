@@ -2,12 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const StyledHeader = styled.h2`
-  color: #7ababb;
-  font-size: 1.7em;
-  font-weight: bold;
-`;
-
 const StyledCardList = styled.section`
   background: #fcffff;
   border: solid 1px #e5e8ef;
@@ -21,22 +15,37 @@ const StyledCardList = styled.section`
   text-decoration: none;
 `;
 
-const StyledItem = styled(Link)`
-  margin: 0 0 20px;
-  text-decoration: none;
-  &:visited {
-    color: #818988;
-    text-decoration: none;
-  }
+const StyledHeader = styled.h2`
+  color: #7ababb;
+  font-size: 1.7em;
+  font-weight: bold;
 `;
+
+const StyledItem = styled.div``;
 
 const StyledDeleteButton = styled.button`
   background: none;
   border: none;
   font-size: 1.2em;
   justify-self: right;
-  margin: 10px 0;
+  margin: 10px;
   width: 20%;
+`;
+
+const StyledImage = styled.img`
+  clip-path: circle(35px at center);
+`;
+
+const StyledInfoWrapper = styled(Link)`
+  align-items: center;
+  display: grid;
+  grid-template-columns: 25% auto;
+  margin: 0 0 20px;
+  text-decoration: none;
+  &:visited {
+    color: #818988;
+    text-decoration: none;
+  }
 `;
 
 export default function Class({ classes, onClassDelete, history }) {
@@ -52,19 +61,19 @@ export default function Class({ classes, onClassDelete, history }) {
       <StyledDeleteButton onClick={onDeleteClick}>
         <img
           src={process.env.PUBLIC_URL + '/assets/Trash.svg'}
-          width="80%"
           alt="Trash icon"
         />
       </StyledDeleteButton>
       <StyledHeader>{classname}</StyledHeader>
       {students.map(student => {
         return (
-          <StyledItem
+          <StyledInfoWrapper
             key={student.id}
             to={`/classes/${classId}/student/${student.id}`}
           >
-            {student.name}
-          </StyledItem>
+            <StyledImage src={student.img} alt="Profile" />
+            <StyledItem>{student.name}</StyledItem>
+          </StyledInfoWrapper>
         );
       })}
     </StyledCardList>

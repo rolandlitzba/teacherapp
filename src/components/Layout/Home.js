@@ -25,21 +25,25 @@ const StyledNavComponents = styled(Link)`
   text-decoration: none;
 `;
 
+const StyledImage = styled.img`
+  padding: 10% 10%;
+`;
+
 export default function Home() {
   return (
     <Wrapper>
       <StyledNavComponents to={`/classes`}>
-        <img
+        <StyledImage
           src={process.env.PUBLIC_URL + '/assets/class.svg'}
-          width="50%"
+          width="80%"
           alt="Class icon"
         />
         <div>Classes</div>
       </StyledNavComponents>
       <StyledNavComponents to={`/students`}>
-        <img
+        <StyledImage
           src={process.env.PUBLIC_URL + '/assets/student.svg'}
-          width="50%"
+          width="80%"
           alt="Student icon"
         />
         <div>Students</div>

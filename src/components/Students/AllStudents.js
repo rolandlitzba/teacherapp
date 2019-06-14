@@ -13,14 +13,7 @@ const StyledHeader = styled.h2`
   font-weight: bold;
 `;
 
-const StyledItem = styled(Link)`
-  margin: 0 0 20px;
-  text-decoration: none;
-  &:visited {
-    color: #818988;
-    text-decoration: none;
-  }
-`;
+const StyledItem = styled.div``;
 
 const StyledClassWrapper = styled.section`
   background: #fcffff;
@@ -35,8 +28,20 @@ const StyledClassWrapper = styled.section`
   text-decoration: none;
 `;
 
-const StyledWrapper = styled.div`
-  margin: 10px 0;
+const StyledImage = styled.img`
+  clip-path: circle(35px at center);
+`;
+
+const StyledInfoWrapper = styled(Link)`
+  align-items: center;
+  display: grid;
+  grid-template-columns: 25% auto;
+  margin: 0 0 20px;
+  text-decoration: none;
+  &:visited {
+    color: #818988;
+    text-decoration: none;
+  }
 `;
 
 export default function AllStudents({ classes }) {
@@ -47,13 +52,13 @@ export default function AllStudents({ classes }) {
           <StyledClassWrapper key={classItem.classId}>
             <StyledHeader>{classItem.classname}</StyledHeader>
             {classItem.students.map(student => (
-              <StyledWrapper key={student.id}>
-                <StyledItem
-                  to={`/classes/${classItem.classId}/student/${student.id}`}
-                >
-                  {student.name}
-                </StyledItem>
-              </StyledWrapper>
+              <StyledInfoWrapper
+                key={student.id}
+                to={`/classes/${classItem.classId}/student/${student.id}`}
+              >
+                <StyledImage src={student.img} alt="Profile" />
+                <StyledItem>{student.name}</StyledItem>
+              </StyledInfoWrapper>
             ))}
           </StyledClassWrapper>
         );

@@ -35,11 +35,11 @@ const Main = styled.main`
 const StyledAddButton = styled.button`
   background: none;
   border: none;
-  bottom: 50px;
+  bottom: 7%;
   font-size: 1.2em;
   padding: 0;
   position: absolute;
-  right: 10px;
+  right: 3%;
 `;
 
 export default function App() {

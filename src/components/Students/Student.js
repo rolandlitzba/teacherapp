@@ -25,10 +25,8 @@ const StyledDeleteButton = styled.button`
   width: 20%;
 `;
 
-const StyledButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  padding: 20px 10px 10px;
+const StyledEditButton = styled.img`
+  width: 85%;
 `;
 
 const StyledButton = styled.button`
@@ -37,11 +35,21 @@ const StyledButton = styled.button`
   font-size: 1.2em;
   justify-self: center;
   margin: 10px;
-  width: 20%;
 `;
+
+const StyledButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px 10px 10px;
+`;
+
 const StyledImageWrapper = styled.div`
   display: grid;
   justify-content: left;
+`;
+
+const StyledImage = styled.img`
+  clip-path: circle(35px at center);
 `;
 
 export default function Student({
@@ -111,8 +119,8 @@ export default function Student({
     <StyledCardDetails onSubmit={onFormSubmit}>
       <StyledDeleteButton onClick={onDeleteClick}>
         <img
+          clipPath="circle(30px at center)"
           src={process.env.PUBLIC_URL + '/assets/Trash.svg'}
-          width="80%"
           alt="Trash icon"
         />
       </StyledDeleteButton>
@@ -121,7 +129,7 @@ export default function Student({
         <input type="file" name="file" onChange={upload} />
       ) : (
         <StyledImageWrapper>
-          <img src={img} alt="Profile" style={{ width: '100%' }} />
+          <StyledImage src={img} alt="Profile" style={{ width: '100%' }} />
           <button onClick={onDeleteImage}>Löschen</button>
         </StyledImageWrapper>
       )}
@@ -165,11 +173,10 @@ export default function Student({
       <StyledDeleteButton onClick={onDeleteClick}>
         <img
           src={process.env.PUBLIC_URL + '/assets/Trash.svg'}
-          width="80%"
           alt="Trash icon"
         />
       </StyledDeleteButton>
-      <img src={img} alt="ProfileImage" />
+      <StyledImage src={img} alt="ProfileImage" />
       <StudentInfoGroup
         label="Name:"
         name="name"
@@ -179,9 +186,8 @@ export default function Student({
       <StudentInfoGroup label="Absence:" name="absence" value={absence} />
       <StudentInfoGroup label="Comments:" name="comments" value={comments} />
       <StyledButton onClick={() => setIsEditable(!isEditable)}>
-        <img
+        <StyledEditButton
           src={process.env.PUBLIC_URL + '/assets/Edit.svg'}
-          width="80%"
           alt="Edit icon"
         />
       </StyledButton>
