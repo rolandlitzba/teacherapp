@@ -1,3 +1,7 @@
+export function getClass() {
+  return fetch('/class').then(res => res.json());
+}
+
 export function postClass(data) {
   return fetchCard('POST', data);
 }
@@ -46,7 +50,3 @@ export function getLocal(data) {
     console.log(error);
   }
 }
-
-// export function getCards() {
-//   return fetch('/class').then(res => res.json());
-// }

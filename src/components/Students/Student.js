@@ -50,6 +50,7 @@ const StyledImageWrapper = styled.div`
 
 const StyledImage = styled.img`
   clip-path: circle(35px at center);
+  width: 60px;
 `;
 
 export default function Student({
@@ -69,7 +70,6 @@ export default function Student({
   const [newAbsence, setNewAbsence] = useState(absence);
   const [newComments, setNewComments] = useState(comments);
   const [isDeleted, setIsDeleted] = useState(false);
-
   function cancelChange() {
     setIsEditable(!isEditable);
   }

@@ -34,6 +34,7 @@ const StyledDeleteButton = styled.button`
 
 const StyledImage = styled.img`
   clip-path: circle(35px at center);
+  width: 60px;
 `;
 
 const StyledInfoWrapper = styled(Link)`

@@ -22,8 +22,8 @@ app.patch('/class/:id', (req, res) => {
     .catch(err => res.json(err));
 });
 
-// app.get('/class', (req, res) => {
-//   Classes.find()
-//     .then(cardItem => res.json(cardItem))
-//     .catch(err => res.json(err));
-// });
+app.get('/class', (req, res) => {
+  Classes.find()
+    .then(classes => res.json(classes))
+    .catch(err => res.json(err));
+});

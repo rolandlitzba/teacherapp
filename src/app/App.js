@@ -10,7 +10,8 @@ import {
   setLocal,
   postClass,
   deleteClass,
-  updateStudent
+  updateStudent,
+  getClass
 } from '../services';
 import ClassList from '../components/Classes/ClassList';
 import Class from '../components/Classes/Class';
@@ -43,17 +44,24 @@ const StyledAddButton = styled.button`
 `;
 
 export default function App() {
-  const [classes, setClasses] = useState(getLocal('classes') || mockdata);
+  const [classes, setClasses] = useState(getLocal('classes') || mockdata || []);
   const { isShowing, toggle } = useCreateNewClass();
+
   useEffect(() => {
     setLocal('classes', classes);
   }, [classes]);
+
+  useEffect(() => {
+    getClass('classes')
+      .then(data => setClasses(data))
+      .catch(error => console.log(error));
+  });
 
   function handleCreateNewClass(data) {
     const newClass = {
       classname: data.classname,
       classId: data.classId,
-      students: [{ name: '', id: '', img: '', absence: '', comments: '' }]
+      students: []
     };
 
     setClasses(prevState => [...prevState, newClass]);
@@ -73,7 +81,14 @@ export default function App() {
       ...classes[classIndex],
       students: [
         ...students,
-        { name: data.name, id: data.id, img: '', absence: '', comments: '' }
+        {
+          name: data.name,
+          id: data.id,
+          img:
+            'https://res.cloudinary.com/dvdsptlml/image/upload/v1560327657/hhv39s4cd2bvzqe5opsj.png',
+          absence: '',
+          comments: ''
+        }
       ]
     };
     setClasses([
@@ -82,6 +97,7 @@ export default function App() {
       ...classes.slice(classIndex + 1)
     ]);
     updateStudent(updatedClass);
+    console.log(students);
   }
 
   function handleUpdateByStudent(data, classId) {
