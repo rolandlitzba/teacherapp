@@ -44,7 +44,7 @@ const StyledAddButton = styled.button`
 `;
 
 export default function App() {
-  const [classes, setClasses] = useState(getLocal('classes') || mockdata || []);
+  const [classes, setClasses] = useState([]);
   const { isShowing, toggle } = useCreateNewClass();
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function App() {
     getClass('classes')
       .then(data => setClasses(data))
       .catch(error => console.log(error));
-  });
+  }, []);
 
   function handleCreateNewClass(data) {
     const newClass = {
@@ -86,8 +86,8 @@ export default function App() {
           id: data.id,
           img:
             'https://res.cloudinary.com/dvdsptlml/image/upload/v1560327657/hhv39s4cd2bvzqe5opsj.png',
-          absence: '',
-          comments: ''
+          absence: 0,
+          comments: 'no comments'
         }
       ]
     };
@@ -97,7 +97,6 @@ export default function App() {
       ...classes.slice(classIndex + 1)
     ]);
     updateStudent(updatedClass);
-    console.log(students);
   }
 
   function handleUpdateByStudent(data, classId) {

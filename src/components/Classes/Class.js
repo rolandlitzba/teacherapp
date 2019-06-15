@@ -33,6 +33,7 @@ const StyledDeleteButton = styled.button`
 `;
 
 const StyledImage = styled.img`
+  border-radius: 50%;
   clip-path: circle(35px at center);
   width: 60px;
 `;

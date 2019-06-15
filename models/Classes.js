@@ -15,7 +15,7 @@ const classesSchema = new mongoose.Schema({
       id: String,
       img: String,
       absence: Number,
-      comments: String
+      comments: { type: String, default: 'no comments' }
     }
   ]
 });

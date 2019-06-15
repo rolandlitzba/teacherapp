@@ -49,6 +49,8 @@ const StyledImageWrapper = styled.div`
 `;
 
 const StyledImage = styled.img`
+  border: solid 1px #e5e8ef;
+  border-radius: 50%;
   clip-path: circle(35px at center);
   width: 60px;
 `;
@@ -76,7 +78,7 @@ export default function Student({
 
   function onDeleteClick() {
     onStudentDelete(id, classes);
-    history.push('/classes');
+    history.push(`/classes/${classes.classId}`);
   }
 
   function onFormSubmit(event) {
