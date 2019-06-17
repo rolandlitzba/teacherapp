@@ -1,0 +1,19 @@
+---
+name: ClassCard
+---
+
+import ClassCard from './ClassCard.js';
+import { Playground, Props } from 'docz';
+import { BrowserRouter } from 'react-router-dom';
+
+# An overview of the students of one class
+
+<Playground>
+  <BrowserRouter>
+    <ClassCard classItem={{ classname: '5a' }} />
+  </BrowserRouter>
+</Playground>
+
+## Props
+
+<Props of={ClassCard} />

@@ -6,12 +6,12 @@ import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import Home from '../components/Layout/Home';
 import {
-  getLocal,
   setLocal,
   postClass,
   deleteClass,
   updateStudent,
-  getClass
+  getClass,
+  getLocal
 } from '../services';
 import ClassList from '../components/Classes/ClassList';
 import Class from '../components/Classes/Class';
@@ -20,8 +20,6 @@ import Student from '../components/Students/Student';
 import CreateNewStudent from '../components/Students/CreateNewStudent';
 import CreateNewClass from '../components/Classes/CreateNewClass';
 import useCreateNewClass from '../components/Classes/useCreateNewClass';
-
-const mockdata = require('../mockdata.json');
 
 const Grid = styled.div`
   display: grid;
@@ -44,7 +42,7 @@ const StyledAddButton = styled.button`
 `;
 
 export default function App() {
-  const [classes, setClasses] = useState([]);
+  const [classes, setClasses] = useState(getLocal('classes') || []);
   const { isShowing, toggle } = useCreateNewClass();
 
   useEffect(() => {

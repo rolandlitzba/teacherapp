@@ -8,7 +8,7 @@ const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
 
 const StyledCardDetails = styled.form`
-  background: #fcffff;
+  background: white;
   border: solid 1px #e5e8ef;
   border-radius: 12px;
   display: grid;
@@ -19,7 +19,6 @@ const StyledCardDetails = styled.form`
 const StyledDeleteButton = styled.button`
   background: none;
   border: none;
-  font-size: 1.2em;
   justify-self: right;
   margin: 10px 0;
   width: 20%;
@@ -51,8 +50,7 @@ const StyledImageWrapper = styled.div`
 const StyledImage = styled.img`
   border: solid 1px #e5e8ef;
   border-radius: 50%;
-  clip-path: circle(35px at center);
-  width: 60px;
+  width: 100px;
 `;
 
 export default function Student({
@@ -78,7 +76,14 @@ export default function Student({
 
   function onDeleteClick() {
     onStudentDelete(id, classes);
-    history.push(`/classes/${classes.classId}`);
+    const queryStrings = new URLSearchParams(window.location.search);
+    const origin = queryStrings.get('origin');
+
+    if (origin === 'student') {
+      history.replace(`/students`);
+    } else {
+      history.replace(`/classes/${classes.classId}`);
+    }
   }
 
   function onFormSubmit(event) {
@@ -111,6 +116,7 @@ export default function Student({
 
   function onImageSave(response) {
     setImage(response.data.url);
+    history.replace(`/classes/${classes.classId}/student/${id}`);
   }
 
   function onDeleteImage() {
@@ -121,7 +127,6 @@ export default function Student({
     <StyledCardDetails onSubmit={onFormSubmit}>
       <StyledDeleteButton onClick={onDeleteClick}>
         <img
-          clipPath="circle(30px at center)"
           src={process.env.PUBLIC_URL + '/assets/Trash.svg'}
           alt="Trash icon"
         />
@@ -131,7 +136,7 @@ export default function Student({
         <input type="file" name="file" onChange={upload} />
       ) : (
         <StyledImageWrapper>
-          <StyledImage src={img} alt="Profile" style={{ width: '100%' }} />
+          <StyledImage src={img} alt="Profile" />
           <button onClick={onDeleteImage}>Löschen</button>
         </StyledImageWrapper>
       )}

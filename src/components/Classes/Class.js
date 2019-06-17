@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const StyledCardList = styled.section`
-  background: #fcffff;
+  background: white;
   border: solid 1px #e5e8ef;
   border-radius: 12px;
-  box-shadow: 3px 3px 5px 4px #e5e8ef;
   color: black;
   display: grid;
   flex-direction: column;
@@ -33,6 +32,7 @@ const StyledDeleteButton = styled.button`
 `;
 
 const StyledImage = styled.img`
+  border: solid 1px #e5e8ef;
   border-radius: 50%;
   clip-path: circle(35px at center);
   width: 60px;
@@ -55,7 +55,7 @@ export default function Class({ classes, onClassDelete, history }) {
 
   function onDeleteClick() {
     onClassDelete(classId);
-    history.push('/classes');
+    history.replace('/classes');
   }
 
   return (

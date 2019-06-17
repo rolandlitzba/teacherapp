@@ -23,6 +23,7 @@ const StyledClassWrapper = styled.section`
 `;
 
 const StyledImage = styled.img`
+  border: solid 1px #e5e8ef;
   border-radius: 50%;
   clip-path: circle(35px at center);
   width: 60px;
@@ -30,6 +31,7 @@ const StyledImage = styled.img`
 
 const StyledInfoWrapper = styled(Link)`
   align-items: center;
+  background: white;
   border: solid 1px #e5e8ef;
   border-radius: 12px;
   box-shadow: 3px 3px 5px 4px #e5e8ef;
@@ -54,7 +56,9 @@ export default function AllStudents({ classes }) {
             {classItem.students.map(student => (
               <StyledInfoWrapper
                 key={student.id}
-                to={`/classes/${classItem.classId}/student/${student.id}`}
+                to={`/classes/${classItem.classId}/student/${
+                  student.id
+                }?origin=student`}
               >
                 <StyledImage src={student.img} alt="Profile" />
                 <StyledItem>{student.name}</StyledItem>

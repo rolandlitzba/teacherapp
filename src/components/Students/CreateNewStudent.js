@@ -74,12 +74,7 @@ export default function CreateNewStudent({
     ? ReactDOM.createPortal(
         <StyledModal>
           <StyledWrapper>
-            <StyledForm
-              onFormSubmit={onNewStudentSubmit}
-              history={history}
-              hide={hide}
-              onSubmit={onFormSubmit}
-            >
+            <StyledForm history={history} hide={hide} onSubmit={onFormSubmit}>
               <StyledLabel>
                 Student:
                 <StyledInput

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const StyledCard = styled(Link)`
   align-items: center;
-  background: #fcffff;
+  background: white;
   border: solid 1px #e5e8ef;
   box-shadow: 3px 3px 5px 4px #e5e8ef;
   border-radius: 12px;
@@ -26,7 +26,7 @@ const StyledInformation = styled.p`
   padding: 10px;
 `;
 
-export default function Card({ classItem }) {
+export default function ClassCard({ classItem }) {
   const { classname, classId } = classItem;
   return (
     <StyledCard to={`/classes/${classId}`}>
