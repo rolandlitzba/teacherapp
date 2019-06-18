@@ -84,7 +84,7 @@ export default function App() {
           name: data.name,
           id: data.id,
           img:
-            'https://res.cloudinary.com/dvdsptlml/image/upload/v1560327657/hhv39s4cd2bvzqe5opsj.png',
+            'https://res.cloudinary.com/dvdsptlml/image/upload/v1560865936/vknej32qansc0wixhauj.svg',
           absence: 0,
           comments: 'no comments'
         }

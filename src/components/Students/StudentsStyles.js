@@ -42,12 +42,23 @@ export const StyledEditButton = styled.img`
 export const StyledImage = styled.img`
   border: solid 1px #e5e8ef;
   border-radius: 50%;
+  position: relative;
   width: 100px;
 `;
 
 export const StyledImageWrapper = styled.div`
   display: grid;
+  grid-template-columns: 2;
   justify-content: left;
+`;
+
+export const StyledImageDeleteButton = styled.button`
+  background: none;
+  border: none;
+  grid-column-start: 2;
+  left: -35px;
+  position: relative;
+  top: -27px;
 `;
 
 export const StyledModal = styled.div`

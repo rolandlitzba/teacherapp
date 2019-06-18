@@ -9,7 +9,8 @@ import {
   StyledButton,
   StyledButtonWrapper,
   StyledImageWrapper,
-  StyledImage
+  StyledImage,
+  StyledImageDeleteButton
 } from './StudentsStyles';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
@@ -98,7 +99,12 @@ export default function Student({
       ) : (
         <StyledImageWrapper>
           <StyledImage src={img} alt="Profile" />
-          <button onClick={onDeleteImage}>Löschen</button>
+          <StyledImageDeleteButton onClick={onDeleteImage}>
+            <img
+              src={process.env.PUBLIC_URL + '/assets/Delete-Image.svg'}
+              alt="Delete icon"
+            />
+          </StyledImageDeleteButton>
         </StyledImageWrapper>
       )}
 
@@ -109,7 +115,7 @@ export default function Student({
         value={newName}
       />
       <StudentInputGroup
-        label="Absence:"
+        label="Absence (days):"
         name="absence"
         type="number"
         onChange={event => setNewAbsence(event.target.value)}
@@ -151,7 +157,11 @@ export default function Student({
         value={name}
         alt="profile-picture"
       />
-      <StudentInfoGroup label="Absence:" name="absence" value={absence} />
+      <StudentInfoGroup
+        label="Absence (days):"
+        name="absence"
+        value={absence}
+      />
       <StudentInfoGroup label="Comments:" name="comments" value={comments} />
       <StyledButton onClick={() => setIsEditable(!isEditable)}>
         <StyledEditButton
