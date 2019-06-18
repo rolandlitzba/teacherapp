@@ -16,12 +16,11 @@ const StyledCardDetails = styled.form`
   padding: 10px 20px;
 `;
 
-const StyledDeleteButton = styled.button`
+const StyledDeleteButton = styled.div`
   background: none;
   border: none;
   justify-self: right;
   margin: 10px 0;
-  width: 20%;
 `;
 
 const StyledEditButton = styled.img`
@@ -131,7 +130,6 @@ export default function Student({
           alt="Trash icon"
         />
       </StyledDeleteButton>
-
       {isDeleted ? (
         <input type="file" name="file" onChange={upload} />
       ) : (

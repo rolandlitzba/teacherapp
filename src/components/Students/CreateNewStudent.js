@@ -54,6 +54,8 @@ const StyledButton = styled.button`
   padding: 0;
 `;
 
+const StyledCancelButton = styled.div``;
+
 export default function CreateNewStudent({
   history,
   onNewStudentSubmit,
@@ -68,6 +70,7 @@ export default function CreateNewStudent({
       id: uid()
     });
     hide();
+    setNewStudent('');
   }
 
   return isShowing
@@ -84,7 +87,6 @@ export default function CreateNewStudent({
                   placeholder="Insert new student here"
                 />
               </StyledLabel>
-
               <StyledButtonWrapper>
                 <StyledButton>
                   <img
@@ -93,13 +95,13 @@ export default function CreateNewStudent({
                     alt="Confirm icon"
                   />
                 </StyledButton>
-                <StyledButton onClick={hide}>
+                <StyledCancelButton onClick={hide}>
                   <img
                     src={process.env.PUBLIC_URL + '/assets/Cancel.svg'}
                     width="80%"
                     alt="Cancel icon"
                   />
-                </StyledButton>
+                </StyledCancelButton>
               </StyledButtonWrapper>
             </StyledForm>
           </StyledWrapper>

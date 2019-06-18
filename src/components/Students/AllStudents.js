@@ -35,6 +35,7 @@ const StyledInfoWrapper = styled(Link)`
   border: solid 1px #e5e8ef;
   border-radius: 12px;
   box-shadow: 3px 3px 5px 4px #e5e8ef;
+  color: #818988;
   display: grid;
   grid-template-columns: 25% auto;
   margin: 0 0 20px;

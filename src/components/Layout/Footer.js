@@ -14,10 +14,10 @@ const StyledBackButton = styled.div``;
 const GoBack = ({ history }) => (
   <StyledBackButton onClick={() => history.goBack()} alt="Go back">
     <img
-      src={process.env.PUBLIC_URL + '/assets/Back.svg'}
       alt="Back icon"
-      width="28px"
       height="28px"
+      src={process.env.PUBLIC_URL + '/assets/Back.svg'}
+      width="28px"
     />
   </StyledBackButton>
 );

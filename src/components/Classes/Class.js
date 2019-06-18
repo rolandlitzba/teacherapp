@@ -40,6 +40,7 @@ const StyledImage = styled.img`
 
 const StyledInfoWrapper = styled(Link)`
   align-items: center;
+  color: #818988;
   display: grid;
   grid-template-columns: 25% auto;
   margin: 0 0 20px;

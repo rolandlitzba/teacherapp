@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import GlobalStyles from '../components/Common/GlobalStyles';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from '../components/Layout/Header';
+import HeaderHome from '../components/Layout/HeaderHome';
 import Footer from '../components/Layout/Footer';
 import Home from '../components/Layout/Home';
 import {
@@ -23,7 +24,7 @@ import useCreateNewClass from '../components/Classes/useCreateNewClass';
 
 const Grid = styled.div`
   display: grid;
-  grid-template-rows: 70px auto 50px;
+  grid-template-rows: min-content auto 50px;
   height: 100vh;
 `;
 
@@ -158,7 +159,10 @@ export default function App() {
     <Router>
       <Grid>
         <GlobalStyles />
-        <Header />
+        <Switch>
+          <HeaderHome exact path="/" />
+          <Header path="*" />
+        </Switch>
         <Main>
           <Route exact path="/" component={Home} />
           <Route
