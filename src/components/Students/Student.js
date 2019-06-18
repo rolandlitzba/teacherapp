@@ -1,56 +1,19 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import StudentInputGroup from './StudentInputGroup';
 import StudentInfoGroup from './StudentInfoGroup';
 import axios from 'axios';
+import {
+  StyledCardDetails,
+  StyledDeleteButton,
+  StyledEditButton,
+  StyledButton,
+  StyledButtonWrapper,
+  StyledImageWrapper,
+  StyledImage
+} from './StudentsStyles';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
-
-const StyledCardDetails = styled.form`
-  background: white;
-  border: solid 1px #e5e8ef;
-  border-radius: 12px;
-  display: grid;
-  margin: 15px;
-  padding: 10px 20px;
-`;
-
-const StyledDeleteButton = styled.div`
-  background: none;
-  border: none;
-  justify-self: right;
-  margin: 10px 0;
-`;
-
-const StyledEditButton = styled.img`
-  width: 85%;
-`;
-
-const StyledButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 1.2em;
-  justify-self: center;
-  margin: 10px;
-`;
-
-const StyledButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  padding: 20px 10px 10px;
-`;
-
-const StyledImageWrapper = styled.div`
-  display: grid;
-  justify-content: left;
-`;
-
-const StyledImage = styled.img`
-  border: solid 1px #e5e8ef;
-  border-radius: 50%;
-  width: 100px;
-`;
 
 export default function Student({
   classes,

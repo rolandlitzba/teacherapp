@@ -1,18 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const StyledLabel = styled.label`
-  display: grid;
-  font-size: 1.2em;
-  margin: 30px 0 0;
-`;
-
-const StyledInput = styled.input`
-  color: #818988;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 1em;
-`;
+import {
+  StyledStudentInfoLabel,
+  StyledStudentEditInput
+} from './StudentsStyles';
 
 function StudentInputGroup({
   label,
@@ -23,16 +13,16 @@ function StudentInputGroup({
   value
 }) {
   return (
-    <StyledLabel>
+    <StyledStudentInfoLabel>
       {label ? label : null}
-      <StyledInput
+      <StyledStudentEditInput
         name={name}
         onChange={onChange}
         placeholder={placeholder}
         type={type || 'text'}
         value={value}
       />
-    </StyledLabel>
+    </StyledStudentInfoLabel>
   );
 }
 

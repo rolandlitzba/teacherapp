@@ -1,25 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
-
-const StyledFooter = styled.footer`
-  border-top: solid #e5e8ef;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  padding: 10px 40px;
-`;
-
-const StyledBackButton = styled.div``;
+import { StyledFooter, StyledBackButtonWrapper } from './LayoutStyles';
 
 const GoBack = ({ history }) => (
-  <StyledBackButton onClick={() => history.goBack()} alt="Go back">
+  <StyledBackButtonWrapper onClick={() => history.goBack()} alt="Go back">
     <img
       alt="Back icon"
       height="28px"
       src={process.env.PUBLIC_URL + '/assets/Back.svg'}
       width="28px"
     />
-  </StyledBackButton>
+  </StyledBackButtonWrapper>
 );
 
 const StyledHomeButton = styled(Link)``;
