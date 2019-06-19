@@ -12,12 +12,10 @@ import {
   StyledImage,
   StyledImageDeleteButton
 } from './StudentsStyles';
-import styled from 'styled-components';
 import StyledLoadingSpinner from '../Common/LoadingSpinner';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
-const StyledLoadIcon = styled.div``;
 
 export default function Student({
   classes,
