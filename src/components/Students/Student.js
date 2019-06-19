@@ -12,9 +12,12 @@ import {
   StyledImage,
   StyledImageDeleteButton
 } from './StudentsStyles';
+import styled from 'styled-components';
+import StyledLoadingSpinner from '../Common/LoadingSpinner';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
+const StyledLoadIcon = styled.div``;
 
 export default function Student({
   classes,
@@ -33,6 +36,9 @@ export default function Student({
   const [newAbsence, setNewAbsence] = useState(absence);
   const [newComments, setNewComments] = useState(comments);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [isImageUploading, setIsImageUploading] = useState(false);
+  const [isImageUploadCompleted, setIsImageUploadCompleted] = useState(false);
+
   function cancelChange() {
     setIsEditable(!isEditable);
   }
@@ -67,6 +73,7 @@ export default function Student({
     const formData = new FormData();
     formData.append('file', event.target.files[0]);
     formData.append('upload_preset', PRESET);
+    setIsImageUploading(true);
     axios
       .post(url, formData, {
         headers: {
@@ -78,6 +85,8 @@ export default function Student({
   }
 
   function onImageSave(response) {
+    setIsImageUploading(false);
+    setIsImageUploadCompleted(!isImageUploadCompleted);
     setImage(response.data.url);
     history.replace(`/classes/${classes.classId}/student/${id}`);
   }
@@ -95,7 +104,14 @@ export default function Student({
         />
       </StyledDeleteButton>
       {isDeleted ? (
-        <input type="file" name="file" onChange={upload} />
+        <>
+          {isImageUploadCompleted ? (
+            <StyledImage src={image} alt="Profile Preview" />
+          ) : (
+            <input type="file" name="file" onChange={upload} />
+          )}
+          {isImageUploading && <StyledLoadingSpinner />}
+        </>
       ) : (
         <StyledImageWrapper>
           <StyledImage src={img} alt="Profile" />

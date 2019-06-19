@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   StyledHomeHeader,
-  StyledName,
+  StyledHomeName,
   StyledDate,
   StyledWeekday
 } from './LayoutStyles';
@@ -16,7 +16,7 @@ const date = year + '-' + month + '-' + day;
 export default function HeaderHome() {
   return (
     <StyledHomeHeader>
-      <StyledName>MyClass</StyledName>
+      <StyledHomeName>MyClass</StyledHomeName>
       <StyledDate>{date}</StyledDate>
       <StyledWeekday>{nameOfDay}</StyledWeekday>
     </StyledHomeHeader>

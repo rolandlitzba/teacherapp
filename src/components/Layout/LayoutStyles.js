@@ -14,6 +14,7 @@ export const StyledHeader = styled.header`
   background-image: linear-gradient(50deg, #b1deb5, #7dbcbb 45%, #3290ba);
   text-align: center;
   height: 60px;
+  padding: 20px;
 `;
 
 export const StyledHomeHeader = styled.header`
@@ -21,8 +22,17 @@ export const StyledHomeHeader = styled.header`
   text-align: center;
   height: 220px;
 `;
+export const StyledHomeButton = styled(Link)``;
 
-export const StyledName = styled.h1`
+export const StyledName = styled(Link)`
+  color: #fcffff;
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: 20px;
+  text-decoration: none;
+`;
+
+export const StyledHomeName = styled.h1`
   color: #fcffff;
   font-size: 1.4em;
   padding: 20px;

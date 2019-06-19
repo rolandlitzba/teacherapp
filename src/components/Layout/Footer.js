@@ -1,7 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Link, withRouter } from 'react-router-dom';
-import { StyledFooter, StyledBackButtonWrapper } from './LayoutStyles';
+import { withRouter } from 'react-router-dom';
+import {
+  StyledFooter,
+  StyledBackButtonWrapper,
+  StyledHomeButton
+} from './LayoutStyles';
 
 const GoBack = ({ history }) => (
   <StyledBackButtonWrapper onClick={() => history.goBack()} alt="Go back">
@@ -13,8 +16,6 @@ const GoBack = ({ history }) => (
     />
   </StyledBackButtonWrapper>
 );
-
-const StyledHomeButton = styled(Link)``;
 
 export default function Footer() {
   const ShowLastPage = withRouter(GoBack);

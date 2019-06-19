@@ -4,7 +4,7 @@ import { StyledHeader, StyledName } from './LayoutStyles';
 export default function Header() {
   return (
     <StyledHeader>
-      <StyledName>MyClass</StyledName>
+      <StyledName to="/">MyClass</StyledName>
     </StyledHeader>
   );
 }
