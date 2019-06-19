@@ -8,8 +8,6 @@ export const StyledFooter = styled.footer`
   padding: 10px 40px;
 `;
 
-export const StyledBackButtonWrapper = styled.div``;
-
 export const StyledHeader = styled.header`
   background-image: linear-gradient(50deg, #b1deb5, #7dbcbb 45%, #3290ba);
   text-align: center;
@@ -20,7 +18,7 @@ export const StyledHeader = styled.header`
 export const StyledHomeHeader = styled.header`
   background-image: linear-gradient(50deg, #b1deb5, #7dbcbb 45%, #3290ba);
   text-align: center;
-  height: 220px;
+  height: 210px;
 `;
 export const StyledHomeButton = styled(Link)``;
 
@@ -79,3 +77,5 @@ export const StyledNavComponents = styled(Link)`
 export const StyledImage = styled.img`
   padding: 10% 10%;
 `;
+
+export const StyledBackButtonWrapper = styled.div``;

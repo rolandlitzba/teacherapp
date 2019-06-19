@@ -163,7 +163,7 @@ export const StyledStudentInfoLabel = styled.label`
 
 export const StyledStudentInformation = styled.p`
   color: #818988;
-  margin: 0 0 30px;
+  margin: 0 0 10px;
 `;
 
 export const StyledStudentEditInput = styled.input`
@@ -171,4 +171,6 @@ export const StyledStudentEditInput = styled.input`
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 1em;
+  margin: 0 0 8px;
+  border: none;
 `;
