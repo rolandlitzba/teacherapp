@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import GlobalStyles from '../components/Common/GlobalStyles';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from '../components/Layout/Header';
+import HeaderHome from '../components/Layout/HeaderHome';
 import Footer from '../components/Layout/Footer';
 import Home from '../components/Layout/Home';
-import { getLocal, setLocal } from '../services';
+import {
+  setLocal,
+  postClass,
+  deleteClass,
+  updateStudent,
+  getClass,
+  getLocal
+} from '../services';
 import ClassList from '../components/Classes/ClassList';
 import Class from '../components/Classes/Class';
 import AllStudents from '../components/Students/AllStudents';
@@ -14,11 +22,9 @@ import CreateNewStudent from '../components/Students/CreateNewStudent';
 import CreateNewClass from '../components/Classes/CreateNewClass';
 import useCreateNewClass from '../components/Classes/useCreateNewClass';
 
-const mockdata = require('../mockdata.json');
-
 const Grid = styled.div`
   display: grid;
-  grid-template-rows: 70px auto 50px;
+  grid-template-rows: min-content auto 50px;
   height: 100vh;
 `;
 
@@ -29,40 +35,59 @@ const Main = styled.main`
 const StyledAddButton = styled.button`
   background: none;
   border: none;
-  bottom: 50px;
+  bottom: 7%;
   font-size: 1.2em;
   padding: 0;
   position: absolute;
-  right: 10px;
+  right: 3%;
 `;
 
 export default function App() {
-  const [classes, setClasses] = useState(getLocal('classes') || mockdata);
+  const [classes, setClasses] = useState(getLocal('classes') || []);
   const { isShowing, toggle } = useCreateNewClass();
+
   useEffect(() => {
     setLocal('classes', classes);
   }, [classes]);
 
+  useEffect(() => {
+    getClass('classes')
+      .then(data => setClasses(data))
+      .catch(error => console.log(error));
+  }, []);
+
   function handleCreateNewClass(data) {
-    const newClass = [
-      ...classes,
-      {
-        classname: data.classname,
-        id: data.id,
-        students: [{ name: '', id: '', img: '', absence: '', comments: '' }]
-      }
-    ];
-    setClasses(newClass);
+    const newClass = {
+      classname: data.classname,
+      classId: data.classId,
+      students: []
+    };
+
+    setClasses(prevState => [...prevState, newClass]);
+    postClass(newClass);
   }
 
-  function handleCreateNewStudent(data, id) {
-    const classIndex = classes.findIndex(card => card.id === id);
+  function handleDeleteClassById(classId) {
+    const index = classes.findIndex(card => card.classId === classId);
+    setClasses([...classes.slice(0, index), ...classes.slice(index + 1)]);
+    deleteClass(classId);
+  }
+
+  function handleCreateNewStudent(data, classId) {
+    const classIndex = classes.findIndex(card => card.classId === classId);
     const { students } = classes[classIndex];
     const updatedClass = {
       ...classes[classIndex],
       students: [
         ...students,
-        { name: data.name, id: data.id, img: '', absence: '', comments: '' }
+        {
+          name: data.name,
+          id: data.id,
+          img:
+            'https://res.cloudinary.com/dvdsptlml/image/upload/v1560865936/vknej32qansc0wixhauj.svg',
+          absence: 0,
+          comments: 'no comments'
+        }
       ]
     };
     setClasses([
@@ -70,20 +95,11 @@ export default function App() {
       updatedClass,
       ...classes.slice(classIndex + 1)
     ]);
+    updateStudent(updatedClass);
   }
 
-  function handleFindClassById(id) {
-    const selectedClass = classes.find(card => card.id === id);
-    return selectedClass;
-  }
-
-  function handleDeleteClassById(id) {
-    const index = classes.findIndex(card => card.id === id);
-    setClasses([...classes.slice(0, index), ...classes.slice(index + 1)]);
-  }
-
-  function handleUpdateByStudent(data, id) {
-    const classIndex = classes.findIndex(card => card.id === id);
+  function handleUpdateByStudent(data, classId) {
+    const classIndex = classes.findIndex(card => card.classId === classId);
     const { students } = classes[classIndex];
     const studentIndex = classes[classIndex].students.findIndex(
       student => student.id === data.id
@@ -108,10 +124,11 @@ export default function App() {
       updatedClass,
       ...classes.slice(classIndex + 1)
     ]);
+    updateStudent(updatedClass);
   }
 
   function handleDeleteStudentById(id, data) {
-    const classIndex = classes.findIndex(card => card.id === data.id);
+    const classIndex = classes.findIndex(card => card.classId === data.classId);
     const studentIndex = classes[classIndex].students.findIndex(
       student => student.id === id
     );
@@ -119,7 +136,7 @@ export default function App() {
     const updatedClass = {
       ...classes[classIndex],
       classname: data.classname,
-      id: data.id,
+      classId: data.classId,
       students: [
         ...students.slice(0, studentIndex),
         ...students.slice(studentIndex + 1)
@@ -130,13 +147,22 @@ export default function App() {
       updatedClass,
       ...classes.slice(classIndex + 1)
     ]);
+    updateStudent(updatedClass);
+  }
+
+  function handleFindClassById(classId) {
+    const selectedClass = classes.find(card => card.classId === classId);
+    return selectedClass;
   }
 
   return (
     <Router>
       <Grid>
         <GlobalStyles />
-        <Header />
+        <Switch>
+          <HeaderHome exact path="/" />
+          <Header path="*" />
+        </Switch>
         <Main>
           <Route exact path="/" component={Home} />
           <Route
@@ -166,10 +192,10 @@ export default function App() {
           />
           <Route
             exact
-            path="/classes/:id"
+            path="/classes/:classId"
             render={props => (
               <Class
-                classes={handleFindClassById(props.match.params.id)}
+                classes={handleFindClassById(props.match.params.classId)}
                 onClassDelete={handleDeleteClassById}
                 {...props}
               />
@@ -177,7 +203,7 @@ export default function App() {
           />
           <Route
             exact
-            path="/classes/:id"
+            path="/classes/:classId"
             render={props => (
               <>
                 <StyledAddButton className="button-default" onClick={toggle}>
@@ -187,13 +213,13 @@ export default function App() {
                   />
                 </StyledAddButton>
                 <CreateNewStudent
+                  classes={handleFindClassById(props.match.params.classId)}
                   onNewStudentSubmit={data =>
                     handleCreateNewStudent(
                       data,
-                      handleFindClassById(props.match.params.id).id
+                      handleFindClassById(props.match.params.classId).classId
                     )
                   }
-                  classes={handleFindClassById(props.match.params.id)}
                   isShowing={isShowing}
                   hide={toggle}
                 />
@@ -213,7 +239,7 @@ export default function App() {
                 onStudentUpdate={data =>
                   handleUpdateByStudent(
                     data,
-                    handleFindClassById(props.match.params.classId).id
+                    handleFindClassById(props.match.params.classId).classId
                   )
                 }
               />

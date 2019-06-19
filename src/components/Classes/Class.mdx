@@ -1,0 +1,19 @@
+---
+name: Class
+---
+
+import Class from './Class.js';
+import { Playground, Props } from 'docz';
+import { BrowserRouter } from 'react-router-dom';
+
+# An overview of the students of one class
+
+<Playground>
+  <BrowserRouter>
+    <Class classes={{ classname: '5a', students.student.name: 'Test' }} />
+  </BrowserRouter>
+</Playground>
+
+## Props
+
+<Props of={Class} />

@@ -1,48 +1,21 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import StudentInputGroup from './StudentInputGroup';
 import StudentInfoGroup from './StudentInfoGroup';
 import axios from 'axios';
+import {
+  StyledCardDetails,
+  StyledDeleteButton,
+  StyledEditButton,
+  StyledButton,
+  StyledButtonWrapper,
+  StyledImageWrapper,
+  StyledImage,
+  StyledImageDeleteButton
+} from './StudentsStyles';
+import StyledLoadingSpinner from '../Common/LoadingSpinner';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
-
-const StyledCardDetails = styled.form`
-  background: #fcffff;
-  border: solid 1px #e5e8ef;
-  border-radius: 12px;
-  display: grid;
-  margin: 15px;
-  padding: 10px 20px;
-`;
-
-const StyledDeleteButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 1.2em;
-  justify-self: right;
-  margin: 10px 0;
-  width: 20%;
-`;
-
-const StyledButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  padding: 20px 10px 10px;
-`;
-
-const StyledButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 1.2em;
-  justify-self: center;
-  margin: 10px;
-  width: 20%;
-`;
-const StyledImageWrapper = styled.div`
-  display: grid;
-  justify-content: left;
-`;
 
 export default function Student({
   classes,
@@ -61,6 +34,8 @@ export default function Student({
   const [newAbsence, setNewAbsence] = useState(absence);
   const [newComments, setNewComments] = useState(comments);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [isImageUploading, setIsImageUploading] = useState(false);
+  const [isImageUploadCompleted, setIsImageUploadCompleted] = useState(false);
 
   function cancelChange() {
     setIsEditable(!isEditable);
@@ -68,7 +43,14 @@ export default function Student({
 
   function onDeleteClick() {
     onStudentDelete(id, classes);
-    history.push('/classes');
+    const queryStrings = new URLSearchParams(window.location.search);
+    const origin = queryStrings.get('origin');
+
+    if (origin === 'student') {
+      history.replace(`/students`);
+    } else {
+      history.replace(`/classes/${classes.classId}`);
+    }
   }
 
   function onFormSubmit(event) {
@@ -89,6 +71,7 @@ export default function Student({
     const formData = new FormData();
     formData.append('file', event.target.files[0]);
     formData.append('upload_preset', PRESET);
+    setIsImageUploading(true);
     axios
       .post(url, formData, {
         headers: {
@@ -100,7 +83,10 @@ export default function Student({
   }
 
   function onImageSave(response) {
+    setIsImageUploading(false);
+    setIsImageUploadCompleted(!isImageUploadCompleted);
     setImage(response.data.url);
+    history.replace(`/classes/${classes.classId}/student/${id}`);
   }
 
   function onDeleteImage() {
@@ -112,17 +98,27 @@ export default function Student({
       <StyledDeleteButton onClick={onDeleteClick}>
         <img
           src={process.env.PUBLIC_URL + '/assets/Trash.svg'}
-          width="80%"
           alt="Trash icon"
         />
       </StyledDeleteButton>
-
       {isDeleted ? (
-        <input type="file" name="file" onChange={upload} />
+        <>
+          {isImageUploadCompleted ? (
+            <StyledImage src={image} alt="Profile Preview" />
+          ) : (
+            <input type="file" name="file" onChange={upload} />
+          )}
+          {isImageUploading && <StyledLoadingSpinner />}
+        </>
       ) : (
         <StyledImageWrapper>
-          <img src={img} alt="Profile" style={{ width: '100%' }} />
-          <button onClick={onDeleteImage}>Löschen</button>
+          <StyledImage src={img} alt="Profile" />
+          <StyledImageDeleteButton onClick={onDeleteImage}>
+            <img
+              src={process.env.PUBLIC_URL + '/assets/Delete-Image.svg'}
+              alt="Delete icon"
+            />
+          </StyledImageDeleteButton>
         </StyledImageWrapper>
       )}
 
@@ -133,7 +129,7 @@ export default function Student({
         value={newName}
       />
       <StudentInputGroup
-        label="Absence:"
+        label="Absence (days):"
         name="absence"
         type="number"
         onChange={event => setNewAbsence(event.target.value)}
@@ -165,23 +161,25 @@ export default function Student({
       <StyledDeleteButton onClick={onDeleteClick}>
         <img
           src={process.env.PUBLIC_URL + '/assets/Trash.svg'}
-          width="80%"
           alt="Trash icon"
         />
       </StyledDeleteButton>
-      <img src={img} alt="ProfileImage" />
+      <StyledImage src={img} alt="ProfileImage" />
       <StudentInfoGroup
         label="Name:"
         name="name"
         value={name}
         alt="profile-picture"
       />
-      <StudentInfoGroup label="Absence:" name="absence" value={absence} />
+      <StudentInfoGroup
+        label="Absence (days):"
+        name="absence"
+        value={absence}
+      />
       <StudentInfoGroup label="Comments:" name="comments" value={comments} />
       <StyledButton onClick={() => setIsEditable(!isEditable)}>
-        <img
+        <StyledEditButton
           src={process.env.PUBLIC_URL + '/assets/Edit.svg'}
-          width="80%"
           alt="Edit icon"
         />
       </StyledButton>
